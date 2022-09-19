@@ -1,0 +1,79 @@
+<div class="row m-3">
+  <div class="col-md-8">
+    <div class="card mt-2 mb-2">
+      <div class="card-body">
+        <h3><a style="color: #E55451; text-decoration: underline;" href="https://www.le-transformation.com/">L.E.
+            Transformation</a></h3>
+        <h6>Delivering credible solutions for incredible bussinesses.</h6>
+        <hr>
+        <img src="/assets/image1.jpg" alt="Loading image ..." width="100%" height="30%">
+        <p class="mt-4">Improving the customer experience by helping you work smarter, not harder. We know the key to
+          developing
+          successful partnerships and relationships is not just meeting, but exceeding our client's needs.<br><br>
+          Serving various clients accross different countries.</p>
+        <hr>
+        <p>This is a Daily Work Management tool developed and powered by L.E. Transformation.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card mx-auto" style="width: 20rem;">
+      <div class="card-body" style="padding: 20px;">
+        <h2 class="card-title text-center mb-4">Sign-up</h2>
+        <hr>
+        <form>
+          <div class="form-floating mb-2" [class.has-error]="nameControl.invalid && nameControl.touched">
+            <input [(ngModel)]="createEmployee.name" type="text" name="fullname" class="form-control" id="fullname"
+              placeholder="name@example.com" #nameControl="ngModel" required>
+            <label for="fullname">Full Name</label>
+            <small class="text-danger" *ngIf="nameControl.invalid && nameControl.touched">
+              Please enter the name.
+            </small>
+          </div>
+
+          <div class="form-floating mb-2" [class.has-error]="emailControl.invalid && emailControl.touched">
+            <input [(ngModel)]="createEmployee.email" type="email" name="email" class="form-control" id="email"
+              placeholder="name@example.com" #emailControl="ngModel" required>
+            <label for="email">Email address</label>
+            <small class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">
+              Please enter the email address.
+            </small>
+          </div>
+
+          <div class="form-floating mb-2" [class.has-error]="passwordControl.invalid && passwordControl.touched">
+            <input [(ngModel)]="createEmployee.password" type="password" name="password" class="form-control"
+              id="password" placeholder="Password" [type]="show ? 'text' : 'password'" #passwordControl="ngModel"
+              required>
+            <label for="password">Password</label>
+            <small class="text-danger" *ngIf="passwordControl.invalid && passwordControl.touched">
+              Please enter the password.
+            </small>
+          </div>
+
+          <div class="form-floating mb-1">
+            <input type="confirmpassword" name="confirmpassword" class="form-control" id="confirmpassword"
+              placeholder="confirmpassword" [type]="show ? 'text' : 'password'" disabled>
+            <label for="password">Confirm Password</label>
+          </div>
+
+          <div style="float: right;">
+            <input class="form-check-input" style="height: 15px; width:15px;
+                          float: right;" type="checkbox" value="" id="showpassword">
+            <label class="form-check-label" for="showpassword" style="user-select: none; cursor: pointer;"
+              (click)="showPassword()">
+              show
+            </label>
+          </div>
+
+          <button [disabled]="!nameControl.valid || !emailControl.valid || !passwordControl.valid"
+            class="btn btn-primary mt-4 mb-1 btn-sm" type="submit" style="width:
+              100%;" (click)="signup()">Signup</button><br>
+          <div class="text-center">
+            <small>Already registered ?<a routerLink="/login" style="text-decoration: none;">
+                Login</a></small>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
