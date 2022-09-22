@@ -164,14 +164,7 @@
 
     <!-- Download dropdown -->
     <div class="dropdown float-right">
-      <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="bi bi-arrow-down-short"></i> Download
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" type="button" (click)="download_pdf()">PDF (.pdf)</a>
-        <a class="dropdown-item" type="button" (click)="download_csv()">Text File (.csv)</a>
-      </div>
+      <button type="button" class="btn btn-sm btn-outline-primary" (click)="download_csv()"><i class="bi bi-arrow-down-short"></i> Download .csv</button>
     </div>
 
     <!-- Select Month -->

@@ -4,7 +4,6 @@ import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { NgToastService } from 'ng-angular-popup';
 
-import * as html2pdf from 'html2pdf.js'
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { formatDate } from '@angular/common';
 
@@ -96,18 +95,6 @@ export class UserdashboardComponent implements OnInit {
         });
       window.location.reload();
     }
-  }
-
-  download_pdf() {
-    var element = document.getElementById('records');
-    var opt = {
-      margin: 1,
-      filename: 'dwm_report.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-    html2pdf().from(element).set(opt).save();
   }
 
   download_csv() {
