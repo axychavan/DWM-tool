@@ -31,6 +31,9 @@ const emergencyinfoRoutes = require('./src/routes/emergencyinfo.route');
 //login route
 const loginRoutes = require('./src/routes/login.route');
 
+//employee route
+const employeeRoutes = require('./src/routes/employee.route');
+
 //create record routes
 app.use('/api/v1/empinfo',  empinfoRoutes);
 app.use('/api/v1/clientinfo',  clientinfoRoutes);
@@ -41,5 +44,8 @@ app.use('/api/v1/emergencyinfo',  emergencyinfoRoutes);
 
 //login middleware
 app.use('/api/v1/login',  loginRoutes);
+
+//employee middleware
+app.use('/api/v1/employee',  employeeRoutes);
 
 app.listen(port, () => console.log(`Listening on port ${port}...${tada}`));
