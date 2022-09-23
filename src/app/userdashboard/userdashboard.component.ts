@@ -29,8 +29,12 @@ export class UserdashboardComponent implements OnInit {
     "password": this.passwordItem
   }
 
+  empidData = {
+    "empid": this.empidItem
+  }
+
   addRecord: any = {}
-  empidrecords: any;
+  employeeRecords: any;
 
   show: boolean = false;
   showPassword() {
@@ -49,14 +53,9 @@ export class UserdashboardComponent implements OnInit {
       this.user = res;
     })
 
-    this.userService.getRecords().subscribe((res) => {
-      console.log("Records", res);
-      this.records = res;
-    })
-
-    this.userService.getempidRecords().subscribe((res) => {
+    this.userService.getemployeeRecords(this.empidData).subscribe((res) => {
       console.log("Employee Specific Records", res);
-      this.empidrecords = res;
+      this.employeeRecords = res;
     })
 
     this.userService.getContacts().subscribe((res) => {

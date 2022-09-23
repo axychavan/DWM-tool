@@ -12,7 +12,7 @@ export class UserService {
 
   contactsUrl = 'http://localhost:3000/api/v1/emergencyinfo';
   transactUrl = 'http://localhost:3000/api/v1/transactinfo';
-  empidTransactUrl = "http://localhost:3000/api/v1/transactinfo/empid";
+  employeeRecordsUrl = "http://localhost:3000/api/v1/employee/records";
   clientUrl = "http://localhost:3000/api/v1/clientinfo";
   taskUrl = "http://localhost:3000/api/v1/tasksinfo";
 
@@ -34,12 +34,8 @@ export class UserService {
     return this.http.post<any>(this.clientinfo, client_data)
   }
 
-  getRecords() {
-    return this.http.get(this.transactUrl);
-  }
-
-  getempidRecords() {
-    return this.http.get(this.empidTransactUrl);
+  getemployeeRecords(empidData) {
+    return this.http.get(this.employeeRecordsUrl);
   }
 
   deleteRecord(id: string) {
