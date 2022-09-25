@@ -11,6 +11,8 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FooterComponent } from './footer/footer.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EmergencycontactComponent } from './emergencycontact/emergencycontact.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { FooterComponent } from './footer/footer.component';
     AdmindashboardComponent,
     LoginComponent,
     SignupComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileComponent,
+    EmergencycontactComponent
   ],
   imports: [
     BrowserModule,

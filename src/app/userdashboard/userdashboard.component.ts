@@ -16,11 +16,10 @@ export class UserdashboardComponent implements OnInit {
 
   user: any;
   records: any;
-  contacts: any;
   clients: any;
   tasks: any;
-  todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-
+  //todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+  currMonth = formatDate(new Date(), 'yyyy-MM', 'en');
 
   empidItem = localStorage.getItem('empid');
   passwordItem = localStorage.getItem('password');
@@ -29,12 +28,11 @@ export class UserdashboardComponent implements OnInit {
     "password": this.passwordItem
   }
 
-  empidData = {
-    "empid": this.empidItem
-  }
+  selectMonth: any = {};
 
-  addRecord: any = {}
+  addRecord: any = {};
   employeeRecords: any;
+  employeeSpecificRecords: any;
 
   show: boolean = false;
   showPassword() {
@@ -47,20 +45,22 @@ export class UserdashboardComponent implements OnInit {
     private userService: UserService,
     private toast: NgToastService,
   ) {
+    console.log("Current month = ", this.currMonth)
 
     this.authService.loginUser(this.loginData).subscribe((res) => {
       console.log("Login response", res);
       this.user = res;
     })
 
-    this.userService.getemployeeRecords(this.empidData).subscribe((res) => {
-      console.log("Employee Specific Records", res);
+    this.userService.getemployeeRecords().subscribe((res) => {
+      console.log("Employee Records", res);
       this.employeeRecords = res;
-    })
 
-    this.userService.getContacts().subscribe((res) => {
-      console.log("Emergency Contacts", res);
-      this.contacts = res;
+      this.employeeSpecificRecords = this.employeeRecords.filter(function (res) {
+        const empidItem = localStorage.getItem('empid');
+        return res.empid == empidItem;
+      });
+      console.log("Employee Specific Records", this.employeeSpecificRecords);
     })
 
     this.userService.getClients().subscribe((res) => {
@@ -72,6 +72,12 @@ export class UserdashboardComponent implements OnInit {
       console.log("List of Tasks", res);
       this.tasks = res;
     })
+  }
+
+  searchRecords() {
+    console.log("Search Clicked")
+
+    console.log("Selected Month", this.selectMonth.month)
   }
 
   add_Record() {
@@ -108,7 +114,7 @@ export class UserdashboardComponent implements OnInit {
       headers: ["ID", "Date", "Emp_ID", "Client_ID", "Task_ID", "Duration", "Description"],
       eol: '\n'
     };
-    new ngxCsv(this.records, "dwm_report", options);
+    new ngxCsv(this.employeeSpecificRecords, "dwm_report", options);
   }
 
   logout() {

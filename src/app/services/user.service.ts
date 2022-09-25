@@ -34,8 +34,8 @@ export class UserService {
     return this.http.post<any>(this.clientinfo, client_data)
   }
 
-  getemployeeRecords(empidData) {
-    return this.http.get(this.employeeRecordsUrl);
+  getemployeeRecords() {
+    return this.http.get(this.transactUrl);
   }
 
   deleteRecord(id: string) {
