@@ -28,11 +28,14 @@ export class UserdashboardComponent implements OnInit {
     "password": this.passwordItem
   }
 
-  selectMonth: any = {};
+  month: any;
 
-  addRecord: any = {};
+  addRecord: any = {
+    "empid": this.empidItem
+  };
   employeeRecords: any;
   employeeSpecificRecords: any;
+  sortRecords: any;
 
   show: boolean = false;
   showPassword() {
@@ -77,27 +80,27 @@ export class UserdashboardComponent implements OnInit {
   searchRecords() {
     console.log("Search Clicked")
 
-    console.log("Selected Month", this.selectMonth.month)
+    console.log("Selected Month", this.month)
+
+    this.sortRecords = this.employeeSpecificRecords;
+    console.log("Sorted Records", this.sortRecords)
   }
 
   add_Record() {
     console.log("Record added successfully");
 
-    this.userService.postTransact(this.addRecord).
-      subscribe(
-        res => {
-          console.log("Record added", res);
-          window.location.reload();
-        })
+    this.userService.postTransact(this.addRecord).subscribe(res => {
+      console.log("Record added", res);
+      window.location.reload();
+    })
     this.toast.success({ detail: "Success", summary: 'Record added successfully', duration: '3000' });
   }
 
   delete_Record(item: { trid: string; }) {
     if (confirm('Are you sure you want to delete ?')) {
-      this.userService.deleteRecord(item.trid)
-        .subscribe(response => {
-          this.records = this.records.filter((item: { id: any; }) => item.id !== item.id);
-        });
+      this.userService.deleteRecord(item.trid).subscribe(response => {
+        this.records = this.records.filter((item: { id: any; }) => item.id !== item.id);
+      });
       window.location.reload();
     }
   }
