@@ -3,8 +3,8 @@ var dbConn = require('../config/db.config');
 var transactinfoRecords = function(records){
     this.date = records.date;
     this.empid = records.empid;
-    this.clientid = records.clientid;
-    this.taskid = records.taskid;
+    this.clientname = records.clientname;
+    this.taskdescription = records.taskdescription;
     this.duration = records.duration;
     this.description = records.description;
 }
@@ -50,7 +50,7 @@ transactinfoRecords.createRecord = (recordReqdata, result) =>{
 
 //update a record by id
 transactinfoRecords.updateRecord = (trid, recordReqdata, result) =>{
-    dbConn.query("UPDATE transactinfo SET date=?, empid=?, clientid=?, taskid=?, duration=?, description=? WHERE trid=?", [recordReqdata.date, recordReqdata.empid, recordReqdata.clientid, recordReqdata.taskid, recordReqdata.duration, recordReqdata.description, trid], 
+    dbConn.query("UPDATE transactinfo SET date=?, empid=?, clientname=?, taskdescription=?, duration=?, description=? WHERE trid=?", [recordReqdata.date, recordReqdata.empid, recordReqdata.clientname, recordReqdata.taskdescription, recordReqdata.duration, recordReqdata.description, trid], 
     (err, res)=>{
         if(err){
             console.log('Error while updating a record');

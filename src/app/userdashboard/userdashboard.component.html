@@ -30,8 +30,9 @@
       <div class="modal-body">
         Hi <span *ngFor="let item of user">{{item.name}}</span>,<br>This is an initial release of the application. Bug
         fixes, performance improvements and new features are
-        rolling out soon. Please provide us your feedback at - <a
-          href="mailto:akshaychavanaxy@gmail.com">akshaychavanaxy@gmail.com</a>
+        rolling out soon. Please provide us your feedback.
+        <!--  at - <a
+          href="mailto:akshaychavanaxy@gmail.com">akshaychavanaxy@gmail.com</a> -->
       </div>
       <div class="ml-auto mb-3 mr-3">
         <button type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal">Okay !</button>
@@ -91,9 +92,8 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Date</th>
-          <th scope="col">EmpID</th>
-          <th scope="col">ClientID</th>
-          <th scope="col">TaskID</th>
+          <th scope="col">Client</th>
+          <th scope="col">Task</th>
           <th scope="col">Duration</th>
           <th scope="col">Description</th>
           <th scope="col" style="width: 50px;">Functions</th>
@@ -103,9 +103,8 @@
         <tr *ngFor="let item of employeeSpecificRecords; let i = index">
           <td>{{i + 1}}</td>
           <td>{{item.date | date: 'dd-MM-yyyy'}}</td>
-          <td>{{item.empid}}</td>
-          <td>{{item.clientid}}</td>
-          <td>{{item.taskid}}</td>
+          <td>{{item.clientname}}</td>
+          <td>{{item.taskdescription}}</td>
           <td>{{item.duration}}</td>
           <td>{{item.description}}</td>
           <td>
@@ -133,64 +132,77 @@
       </div>
       <div class="modal-body">
         <div class="form-row">
-          <div class="form-group col-md-6">
+
+          <div class="form-group col-md-6" [class.has-error]="dateControl.invalid && dateControl.touched">
             <label for="date">Date</label>
-            <input [(ngModel)]="addRecord.date" type="date" class="form-control"
-              onfocus="this.max = new Date().toISOString().split('T')[0]" id="date">
+            <input [(ngModel)]="addRecord.date" #dateControl="ngModel" type="date" class="form-control"
+              onfocus="this.max = new Date().toISOString().split('T')[0]" id="date" required>
+            <small class="text-danger" *ngIf="dateControl.invalid && dateControl.touched">
+              Please select the date.
+            </small>
           </div>
-          <div class="form-group col-md-6">
+
+          <div class="form-group col-md-6" [class.has-error]="durationControl.invalid && durationControl.touched">
             <label for="duration">Duration</label>
             <div class="dropdown">
-              <button class="btn btn-light dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" style="width: 100%; text-align: left;">
-                Select hours ...
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <select [(ngModel)]="addRecord.duration" name="duration" id="duration"
+                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #durationControl="ngModel" required>
                 <option class="dropdown-item">0</option>
-                <option class="dropdown-item">1</option>
-                <option class="dropdown-item">2</option>
-                <option class="dropdown-item">3</option>
-              </div>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+              </select>
             </div>
+            <small class="text-danger" *ngIf="durationControl.invalid && durationControl.touched">
+              Please select your working hours.
+            </small>
           </div>
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6" [class.has-error]="clientControl.invalid && clientControl.touched">
             <label for="client">Client</label>
             <div class="dropdown">
-              <button class="btn btn-light dropdown-toggle" type="button" id="client" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" style="width: 100%; text-align: left;">
-                Select Client ...
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <select [(ngModel)]="addRecord.clientname" name="client" id="client" class="btn btn-light dropdown-toggle"
+                style="width: 100%; text-align: left;" #clientControl="ngModel" required>
+                <option class="dropdown-item">Select a Client ...</option>
                 <option class="dropdown-item" *ngFor="let item of clients">{{item.name}}</option>
-              </div>
+              </select>
             </div>
+            <small class="text-danger" *ngIf="clientControl.invalid && clientControl.touched">
+              Please select a client.
+            </small>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6" [class.has-error]="taskControl.invalid && taskControl.touched">
             <label for="task">Task</label>
             <div class="dropdown">
-              <button class="btn btn-light dropdown-toggle" type="button" id="task" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" style="width: 100%; text-align: left;">
-                Select Task ...
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <select [(ngModel)]="addRecord.taskdescription" name="task" id="task"
+                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #taskControl="ngModel" required>
+                <option class="dropdown-item">Select a Task ...</option>
                 <option class="dropdown-item" *ngFor="let item of tasks">{{item.description}}</option>
-              </div>
+              </select>
             </div>
+            <small class="text-danger" *ngIf="taskControl.invalid && taskControl.touched">
+              Please select a task.
+            </small>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="description">Description</label>
+          <label for="description">Description (optional)</label>
           <textarea [(ngModel)]="addRecord.description" class="form-control" id="description" rows="2"
             placeholder="Description"></textarea>
         </div>
 
         <div class="text-center">
-          <button type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal" (click)="add_Record()"><i
+          <button [disabled]="!dateControl.valid || !durationControl.valid || !clientControl.valid || !taskControl.valid" type="button"
+            class="btn btn-sm btn-outline-success" data-dismiss="modal" (click)="add_Record()"><i
               class="bi bi-plus"></i>
             Add</button>
         </div>
@@ -205,73 +217,86 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Update Record</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle"><i class="bi bi-calendar-check"></i> Add Record</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-
         <div class="form-row">
-          <div class="form-group col-md-6">
+
+          <div class="form-group col-md-6" [class.has-error]="dateControl.invalid && dateControl.touched">
             <label for="date">Date</label>
-            <input type="date" class="form-control" onfocus="this.max=new Date().toISOString().split('T')[0]" id="date">
+            <input [(ngModel)]="addRecord.date" #dateControl="ngModel" type="date" class="form-control"
+              onfocus="this.max = new Date().toISOString().split('T')[0]" id="date" required>
+            <small class="text-danger" *ngIf="dateControl.invalid && dateControl.touched">
+              Please select the date.
+            </small>
           </div>
-          <div class="form-group col-md-6">
+
+          <div class="form-group col-md-6" [class.has-error]="durationControl.invalid && durationControl.touched">
             <label for="duration">Duration</label>
             <div class="dropdown">
-              <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" style="width: 100%; text-align: left;">
-                Select hours ...
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item">1</a>
-                <a class="dropdown-item">2</a>
-                <a class="dropdown-item">3</a>
-              </div>
+              <select [(ngModel)]="addRecord.duration" name="duration" id="duration"
+                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #durationControl="ngModel" required>
+                <option class="dropdown-item">0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+              </select>
             </div>
+            <small class="text-danger" *ngIf="durationControl.invalid && durationControl.touched">
+              Please select your working hours.
+            </small>
           </div>
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="project">Project</label>
+          <div class="form-group col-md-6" [class.has-error]="clientControl.invalid && clientControl.touched">
+            <label for="client">Client</label>
             <div class="dropdown">
-              <button class="btn btn-light dropdown-toggle" type="button" id="project" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" style="width: 100%; text-align: left;">
-                Select Project ...
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item">Project 1</a>
-                <a class="dropdown-item">Project 2</a>
-                <a class="dropdown-item">Project 3</a>
-              </div>
+              <select [(ngModel)]="addRecord.clientname" name="client" id="client" class="btn btn-light dropdown-toggle"
+                style="width: 100%; text-align: left;" #clientControl="ngModel" required>
+                <option class="dropdown-item">Select a Client ...</option>
+                <option class="dropdown-item" *ngFor="let item of clients">{{item.name}}</option>
+              </select>
             </div>
+            <small class="text-danger" *ngIf="clientControl.invalid && clientControl.touched">
+              Please select a client.
+            </small>
           </div>
-          <div class="form-group col-md-6">
+
+          <div class="form-group col-md-6" [class.has-error]="taskControl.invalid && taskControl.touched">
             <label for="task">Task</label>
             <div class="dropdown">
-              <button class="btn btn-light dropdown-toggle" type="button" id="task" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" style="width: 100%; text-align: left;">
-                Select Task ...
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item">Task 1</a>
-                <a class="dropdown-item">Task 1</a>
-                <a class="dropdown-item">Task 1</a>
-              </div>
+              <select [(ngModel)]="addRecord.taskdescription" name="task" id="task"
+                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #taskControl="ngModel" required>
+                <option class="dropdown-item">Select a Task ...</option>
+                <option class="dropdown-item" *ngFor="let item of tasks">{{item.description}}</option>
+              </select>
             </div>
+            <small class="text-danger" *ngIf="taskControl.invalid && taskControl.touched">
+              Please select a task.
+            </small>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="description">Description</label>
-          <textarea class="form-control" id="description" rows="2" placeholder="Description"></textarea>
+          <label for="description">Description (optional)</label>
+          <textarea [(ngModel)]="addRecord.description" class="form-control" id="description" rows="2"
+            placeholder="Description"></textarea>
         </div>
 
         <div class="text-center">
-          <button type="button" class="btn btn-outline-success" data-dismiss="modal"><i
-              class="bi bi-clipboard-check"></i> Update</button>
+          <button [disabled]="!dateControl.valid || !durationControl.valid || !clientControl.valid || !taskControl.valid" type="button"
+            class="btn btn-sm btn-outline-success" data-dismiss="modal" (click)="add_Record()"><i
+              class="bi bi-plus"></i>
+            Add</button>
         </div>
       </div>
     </div>

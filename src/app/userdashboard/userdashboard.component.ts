@@ -48,7 +48,7 @@ export class UserdashboardComponent implements OnInit {
     private userService: UserService,
     private toast: NgToastService,
   ) {
-    console.log("Current month = ", this.currMonth)
+    console.log("Current month = ", this.currMonth);
 
     this.authService.loginUser(this.loginData).subscribe((res) => {
       console.log("Login response", res);
@@ -76,7 +76,7 @@ export class UserdashboardComponent implements OnInit {
       this.tasks = res;
     })
   }
-
+  
   searchRecords() {
     console.log("Search Clicked")
 
@@ -114,7 +114,7 @@ export class UserdashboardComponent implements OnInit {
       showTitle: true,
       title: 'Daily Work Management records',
       useBom: true,
-      headers: ["ID", "Date", "Emp_ID", "Client_ID", "Task_ID", "Duration", "Description"],
+      headers: ["ID", "Date", "Employee ID", "Client", "Task", "Duration", "Description"],
       eol: '\n'
     };
     new ngxCsv(this.employeeSpecificRecords, "dwm_report", options);
