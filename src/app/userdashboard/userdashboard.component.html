@@ -147,7 +147,6 @@
             <div class="dropdown">
               <select [(ngModel)]="addRecord.duration" name="duration" id="duration"
                 class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #durationControl="ngModel" required>
-                <option class="dropdown-item">0</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -183,7 +182,8 @@
             <label for="task">Task</label>
             <div class="dropdown">
               <select [(ngModel)]="addRecord.taskdescription" name="task" id="task"
-                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #taskControl="ngModel" required>
+                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #taskControl="ngModel"
+                required>
                 <option class="dropdown-item">Select a Task ...</option>
                 <option class="dropdown-item" *ngFor="let item of tasks">{{item.description}}</option>
               </select>
@@ -201,8 +201,9 @@
         </div>
 
         <div class="text-center">
-          <button [disabled]="!dateControl.valid || !durationControl.valid || !clientControl.valid || !taskControl.valid" type="button"
-            class="btn btn-sm btn-outline-success" data-dismiss="modal" (click)="add_Record()"><i
+          <button
+            [disabled]="!dateControl.valid || !durationControl.valid || !clientControl.valid || !taskControl.valid"
+            type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal" (click)="add_Record()"><i
               class="bi bi-plus"></i>
             Add</button>
         </div>
@@ -238,9 +239,9 @@
             <label for="duration">Duration</label>
             <div class="dropdown">
               <select [(ngModel)]="addRecord.duration" name="duration" id="duration"
-                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #durationControl="ngModel" required>
-                <option class="dropdown-item">0</option>
-                <option>1</option>
+                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #durationControl="ngModel"
+                required>
+                <option class="dropdown-item">1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
@@ -275,7 +276,8 @@
             <label for="task">Task</label>
             <div class="dropdown">
               <select [(ngModel)]="addRecord.taskdescription" name="task" id="task"
-                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #taskControl="ngModel" required>
+                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #taskControl="ngModel"
+                required>
                 <option class="dropdown-item">Select a Task ...</option>
                 <option class="dropdown-item" *ngFor="let item of tasks">{{item.description}}</option>
               </select>
@@ -293,8 +295,9 @@
         </div>
 
         <div class="text-center">
-          <button [disabled]="!dateControl.valid || !durationControl.valid || !clientControl.valid || !taskControl.valid" type="button"
-            class="btn btn-sm btn-outline-success" data-dismiss="modal" (click)="add_Record()"><i
+          <button
+            [disabled]="!dateControl.valid || !durationControl.valid || !clientControl.valid || !taskControl.valid"
+            type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal" (click)="add_Record()"><i
               class="bi bi-plus"></i>
             Add</button>
         </div>
