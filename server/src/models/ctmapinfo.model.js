@@ -2,7 +2,8 @@ var dbConn = require('../config/db.config');
 
 var ctmapinfoRecords = function(records){
     this.clientid = records.clientid;
-    this.taskid = records.taskid;
+    this.ctname = records.ctname;
+    this.ctdescription = records.ctdescription;
 }
 
 //get all records

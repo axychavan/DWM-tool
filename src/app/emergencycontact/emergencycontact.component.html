@@ -7,15 +7,17 @@
                 Transformation
                 is always keen to be there for you.</span>
         </div>
-        <table class="table table-bordered">
+        <table class="table">
             <thead>
                 <tr>
+                    <th>Sr. no.</th>
                     <th scope="col">Name</th>
                     <th scope="col">Phone</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of contacts">
+                <tr *ngFor="let item of contacts ; let i = index;">
+                    <td>{{i + 1}}</td>
                     <td>{{item.name}}</td>
                     <td><a href="tel:{{item.phone}}">{{item.phone}}</a></td>
                 </tr>

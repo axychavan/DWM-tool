@@ -13,6 +13,7 @@ import { SignupComponent } from './signup/signup.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EmergencycontactComponent } from './emergencycontact/emergencycontact.component';
+import { CtmapComponent } from './ctmap/ctmap.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EmergencycontactComponent } from './emergencycontact/emergencycontact.c
     SignupComponent,
     FooterComponent,
     ProfileComponent,
-    EmergencycontactComponent
+    EmergencycontactComponent,
+    CtmapComponent
   ],
   imports: [
     BrowserModule,

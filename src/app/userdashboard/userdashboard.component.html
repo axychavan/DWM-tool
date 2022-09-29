@@ -109,7 +109,7 @@
           <td>{{item.description}}</td>
           <td>
             <button type="button" class="btn btn-outline-primary btn-sm
-                mr-2" data-toggle="modal" data-target="#updaterecord"><i class="bi bi-pencil-square"></i></button>
+                mr-2" data-toggle="modal" data-target="#updaterecord" disabled><i class="bi bi-pencil-square"></i></button>
             <button type="button" class="btn btn-outline-danger btn-sm" (click)=" delete_Record(item)"><i
                 class="bi bi-trash"></i></button>
           </td>
@@ -146,7 +146,8 @@
             <label for="duration">Duration</label>
             <div class="dropdown">
               <select [(ngModel)]="addRecord.duration" name="duration" id="duration"
-                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #durationControl="ngModel" required>
+                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #durationControl="ngModel"
+                required>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -170,7 +171,7 @@
               <select [(ngModel)]="addRecord.clientname" name="client" id="client" class="btn btn-light dropdown-toggle"
                 style="width: 100%; text-align: left;" #clientControl="ngModel" required>
                 <option class="dropdown-item">Select a Client ...</option>
-                <option class="dropdown-item" *ngFor="let item of clients">{{item.name}}</option>
+                <option class="dropdown-item" *ngFor="let item of ctmap">{{item.ctname}}</option>
               </select>
             </div>
             <small class="text-danger" *ngIf="clientControl.invalid && clientControl.touched">
@@ -185,7 +186,7 @@
                 class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #taskControl="ngModel"
                 required>
                 <option class="dropdown-item">Select a Task ...</option>
-                <option class="dropdown-item" *ngFor="let item of tasks">{{item.description}}</option>
+                <option class="dropdown-item" *ngFor="let item of ctmap">{{item.ctdescription}}</option>
               </select>
             </div>
             <small class="text-danger" *ngIf="taskControl.invalid && taskControl.touched">

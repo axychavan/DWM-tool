@@ -22,16 +22,23 @@
         <h2 class="card-title mb-4 text-center">Log-in</h2>
         <hr>
         <form>
-          <div class="form-floating mb-3">
+          <div class="form-floating mb-3" [class.has-error]="empidControl.invalid && empidControl.touched">
             <input [(ngModel)]="loginData.empid" #empid type="text" name="empid" class="form-control" id="empid"
-              placeholder="30190002">
+              placeholder="30190002" #empidControl="ngModel" required>
             <label for="empid">Employee Id</label>
+            <small class="text-danger" *ngIf="empidControl.invalid && empidControl.touched">
+              Please enter your employee ID.
+            </small>
           </div>
 
-          <div class="form-floating mb-1">
+          <div class="form-floating mb-1" [class.has-error]="passwordControl.invalid && passwordControl.touched">
             <input [(ngModel)]="loginData.password" #password type="password" name="password" class="form-control"
-              id="password" placeholder="Password" [type]="show ? 'text' : 'password'">
+              id="password" placeholder="Password" [type]="show ? 'text' : 'password'" #passwordControl="ngModel"
+              required>
             <label for="password">Password</label>
+            <small class="text-danger" *ngIf="passwordControl.invalid && passwordControl.touched">
+              Please enter a password.
+            </small>
           </div>
 
           <span style="color: DodgerBlue; cursor: pointer;" data-toggle="modal"
@@ -45,8 +52,8 @@
             </label>
           </div>
 
-          <button class="btn btn-primary mt-5 mb-1 btn-sm" type="submit" style="width: 100%;"
-            (click)='login()'>Login</button><br>
+          <button class="btn btn-primary mt-5 mb-1 btn-sm" type="submit" style="width: 100%;" (click)='login()'
+            [disabled]="!empidControl.valid || !passwordControl.valid">Login</button><br>
           <div class="text-center">
             <small>Not registered ?<a routerLink="/signup" style="text-decoration: none;"> Signup</a></small>
           </div>
@@ -71,5 +78,14 @@
     </div>
   </div>
 </div>
+
+
+<select name="cars" id="cars">
+  <option value="volvo">Volvo</option>
+</select>
+
+<select name="cars" id="cars">
+  <option value="volvo">Volvo</option>
+</select>
 
 <app-footer></app-footer>

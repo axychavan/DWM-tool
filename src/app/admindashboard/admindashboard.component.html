@@ -469,77 +469,7 @@
   </div>
 </div>
 
-<!-- Client Task Mapping Card -->
-<div class="card m-3">
-  <div class="card-body">
-    <h3 class="mb-3">
-      Client-Task Mapping
-      <button type="button" class="btn btn-sm btn-outline-primary
-          mb-4" style="float: right;" data-toggle="modal" data-target="#aclienttaskmap">
-        <i class="bi bi-plus-lg"></i> Add
-      </button>
-    </h3>
-    <div style="height: auto; overflow: auto;">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Client ID</th>
-            <th scope="col">Task ID</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of ctmap">
-            <td>{{item.clientid}}</td>
-            <td>{{item.taskid}}</td>
-            <td>
-              <button type="button" class="btn
-                    btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-
-<!-- Client Task Mapping Modal -->
-<div class="container text-center">
-  <div class="modal fade" id="aclienttaskmap" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Client Task
-            Mapping</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-
-          <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Client ID</span>
-            </div>
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-          </div>
-
-          <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Task ID</span>
-            </div>
-            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-          </div>
-
-          <button type="button" class="btn btn-primary mt-3 btn-sm" style="width:
-            250px;">Map</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-ctmap></app-ctmap>
 
 <!-- Emergency Contacts Card -->
 <div class="card m-3">

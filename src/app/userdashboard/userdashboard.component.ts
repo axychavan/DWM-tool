@@ -16,6 +16,7 @@ export class UserdashboardComponent implements OnInit {
 
   user: any;
   records: any;
+  ctmap: any;
   clients: any;
   tasks: any;
   //todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
@@ -66,6 +67,11 @@ export class UserdashboardComponent implements OnInit {
       console.log("Employee Specific Records", this.employeeSpecificRecords);
     })
 
+    this.userService.getctmap().subscribe((res) => {
+      this.ctmap = res;
+      console.log("CTMap Response", this.ctmap);
+    })
+
     this.userService.getClients().subscribe((res) => {
       console.log("List of Clients", res);
       this.clients = res;
@@ -76,7 +82,7 @@ export class UserdashboardComponent implements OnInit {
       this.tasks = res;
     })
   }
-  
+
   searchRecords() {
     console.log("Search Clicked")
 

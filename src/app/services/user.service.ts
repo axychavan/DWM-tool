@@ -16,6 +16,8 @@ export class UserService {
   clientUrl = "http://localhost:3000/api/v1/clientinfo";
   taskUrl = "http://localhost:3000/api/v1/tasksinfo";
 
+  ctmapUrl = "http://localhost:3000/api/v1/ctmapinfo";
+
   constructor(private http: HttpClient) { }
 
   addEmployee(employee_data: any) {
@@ -48,5 +50,9 @@ export class UserService {
 
   postTransact(addRecord: any) {
     return this.http.post<any>(this.transactUrl, addRecord);
+  }
+
+  getctmap() {
+    return this.http.get<any>(this.ctmapUrl);
   }
 }
