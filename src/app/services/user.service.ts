@@ -18,6 +18,9 @@ export class UserService {
 
   ctmapUrl = "http://localhost:3000/api/v1/ctmapinfo";
 
+  //keep
+  emergency_contacts = "http://localhost:3000/api/v1/employee/emergency_contacts";
+
   constructor(private http: HttpClient) { }
 
   addEmployee(employee_data: any) {
@@ -54,5 +57,10 @@ export class UserService {
 
   getctmap() {
     return this.http.get<any>(this.ctmapUrl);
+  }
+
+  //keep
+  getEmergency_contacts() {
+    return this.http.get<any>(this.emergency_contacts);
   }
 }

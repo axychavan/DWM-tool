@@ -11,7 +11,7 @@ export class EmergencycontactComponent implements OnInit {
   contacts: any;
 
   constructor(private userService: UserService) {
-    this.userService.getContacts().subscribe((res) => {
+    this.userService.getEmergency_contacts().subscribe((res) => {
       console.log("Emergency Contacts", res);
       this.contacts = res;
     })
