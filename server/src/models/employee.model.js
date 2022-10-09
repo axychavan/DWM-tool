@@ -1,22 +1,20 @@
 var dbConn = require('../config/db.config');
 
-var employeeLogin = function (data) {
-    this.empid = data.empid;
-    this.password = data.password;
-}
-
-var employeeModel = function (data) {
-    this.date = data.date;
-    this.empid = data.empid;
-    this.clientname = data.clientname;
-    this.taskdescription = data.taskdescription;
-    this.duration = data.duration;
-    this.description = data.description;
+var employeeModel = function (item) {
+    this.empid = item.empid;
+    this.name = item.name;
+    this.email = item.email;
+    this.phone = item.phone;
+    this.designation = item.designation;
+    this.doj = item.doj;
+    this.password = item.password;
+    this.role = item.role;
+    this.emergency = item.emergency;
 }
 
 //login a user 
-employeeLogin.postLogin = (input, result) => {
-    dbConn.query('SELECT * FROM empinfo WHERE empid=? AND password=?', [input.empid, input.password], (err, res) => {
+employeeModel.postLogin = (input, result) => {
+    dbConn.query('SELECT * FROM employee WHERE empid=? AND password=?', [input.empid, input.password], (err, res) => {
         if (err) {
             console.log('Error while fetching records');
             result(null, err);
@@ -27,75 +25,22 @@ employeeLogin.postLogin = (input, result) => {
     })
 }
 
-//get employee specific records
-employeeModel.getEmployeeRecords = (inputEmpid, result) => {
-    dbConn.query('SELECT * FROM transactinfo WHERE empid=?', [inputEmpid.empid], (err, res) => {
+//get all employees
+employeeModel.getAllEmployees = (result) => {
+    dbConn.query('SELECT * FROM employee', (err, res) => {
         if (err) {
-            console.log('Error while fetching records');
+            console.log('Error while fetching DB records');
             result(null, err);
         } else {
-            console.log('Records fetched successfully');
-            result(null, res);
-        }
-    })
-}
-
-//get all transactinfo records
-employeeModel.getAllTransactions = (result) => {
-    dbConn.query('SELECT * FROM transactinfo', (err, res) => {
-        if (err) {
-            console.log('Error while fetching records');
-            result(null, err);
-        } else {
-            console.log('Records fetched successfully');
-            result(null, res);
-        }
-    })
-}
-
-//create transactinfo record
-employeeModel.postTransactions = (input, result) => {
-    dbConn.query('INSERT INTO transactinfo SET ?', input, (err, res) => {
-        if (err) {
-            console.log('Error while inserting a record');
-            result(null, err);
-        } else {
-            console.log('Record created successfully');
-            result(null, res);
-        }
-    })
-}
-
-//update transactinfo record
-employeeModel.putTransactions = (trid, input, result) => {
-    dbConn.query("UPDATE transactinfo SET date=?, empid=?, clientname=?, taskdescription=?, duration=?, description=? WHERE trid=?", [input.date, input.empid, input.clientname, input.taskdescription, input.duration, input.description, trid],
-        (err, res) => {
-            if (err) {
-                console.log('Error while updating a record');
-                result(null, err);
-            } else {
-                console.log('Record updated successfully');
-                result(null, res);
-            }
-        })
-}
-
-//delete transactinfo record
-employeeModel.deleteTransactions = (trid, result) => {
-    dbConn.query('DELETE FROM transactinfo WHERE trid=?', [trid], (err, res) => {
-        if (err) {
-            console.log('Error while deleting a record');
-            result(null, err);
-        } else {
-            console.log('Record deleted successfully');
+            console.log('DB records fetched successfully');
             result(null, res);
         }
     })
 }
 
 //get all emergency contacts
-employeeModel.getAllRecords = (result) => {
-    dbConn.query('SELECT * FROM empinfo WHERE emergency = "yes"', (err, res) => {
+employeeModel.getEmergency = (result) => {
+    dbConn.query('SELECT * FROM employee WHERE emergency = "yes"', (err, res) => {
         if (err) {
             console.log('Error while fetching records');
             result(null, err);
@@ -106,5 +51,57 @@ employeeModel.getAllRecords = (result) => {
     })
 }
 
+//get employee by id
+employeeModel.getEmployeeById = (empid, result) => {
+    dbConn.query('SELECT * FROM employee WHERE empid=?', empid, (err, res) => {
+        if (err) {
+            console.log('Error while fetching a employee by id', err);
+            result(null, err);
+        } else {
+            console.log('Specific employee fetched successfully');
+            result(null, res);
+        }
+    })
+}
+
+//create new employee
+employeeModel.postNewEmployee = (user_input, result) => {
+    dbConn.query('INSERT INTO employee SET ?', user_input, (err, res) => {
+        if (err) {
+            console.log('Error while creating a employee');
+            result(null, err);
+        } else {
+            console.log('Employee created successfully');
+            result(null, res);
+        }
+    })
+}
+
+//update employee by id
+employeeModel.putEmployeeById = (empid, user_input, result) => {
+    dbConn.query("UPDATE employee SET name=?, email=?, phone=?, designation=?, doj=?, password=?, role=?, emergency=? WHERE empid=?", [user_input.name, user_input.email, user_input.phone, user_input.designation, user_input.doj, user_input.password, user_input.role, user_input.emergency, empid],
+        (err, res) => {
+            if (err) {
+                console.log('Error while updating a employee');
+                result(null, err);
+            } else {
+                console.log('Employee updated successfully');
+                result(null, res);
+            }
+        })
+}
+
+//delete employee by id
+employeeModel.deleteEmployee = (empid, result) => {
+    dbConn.query('DELETE FROM employee WHERE empid=?', [empid], (err, res) => {
+        if (err) {
+            console.log('Error while deleting a employee');
+            result(null, err);
+        } else {
+            console.log('Employee deleted successfully');
+            result(null, res);
+        }
+    })
+}
+
 module.exports = employeeModel;
-//module.exports = employeeLogin;

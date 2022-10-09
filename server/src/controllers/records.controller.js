@@ -1,67 +1,64 @@
-const RecordsModel = require('../models/records.model');
+const recordController = require('../models/records.model');
 
 //get all records
-exports.getRecords = (req, res)=>{
-    //console.log('List of all the records');
-    RecordsModel.getAllRecords((err, records)=>{
+exports.getAllRecords = (req, res) => {
+    recordController.getAllRecords((err, records) => {
         console.log('We are here');
-        if(err)
-        res.send(err);
-        console.log('Records', records);
+        if (err)
+            res.send(err);
+        
+        // sorting date in ascending order
+        records.sort(function (a, b) {
+            var c = new Date(a.date);
+            var d = new Date(b.date);
+            return c - d;
+        });
+
+        console.log('Array', records);
         res.send(records)
     })
 }
 
 //get record by id
-exports.getRecordByID = (req, res)=>{
+exports.getRecordById = (req, res) => {
     //console.log('getting record by id');
-    RecordsModel.getRecordByID(req.params.id, (err, record)=>{
-        if(err)
-        res.send(err);
+    recordController.getRecordById(req.params.recid, (err, record) => {
+        if (err)
+            res.send(err);
         console.log('Single record', record);
         res.send(record);
     })
 }
 
-//create a new record
-exports.createNewRecord = (req, res)=>{ 
-    const recordReqdata = new RecordsModel(req.body);
-    console.log('recordReqdata', recordReqdata);
-    //check null
-    if(req.body.constructor === Object && Object.keys(req).length === 0){
-        res.send(400).send({success: false, message: 'Please fill all fields'});
-    }else{
-        console.log('valid data');
-        RecordsModel.createRecord(recordReqdata, (err, records)=>{
-            if(err)
+//create new record
+exports.postNewRecord = (req, res) => {
+    const user_input = new recordController(req.body);
+    console.log('user_input : ', user_input);
+
+    recordController.postNewRecord(user_input, (err, records) => {
+        if (err)
             res.send(err);
-            res.json({status: true, message: 'Record created successfully', data: records.insertId})
-        })
-    }
+        res.json({ recordid: records.insertId, message: 'Record created successfully' })
+    })
 }
 
-//update a record
-exports.updateRecord = (req, res)=>{
-    const recordReqdata = new RecordsModel(req.body);
-    console.log('recordReqdata update', recordReqdata);
-    //check null
-    if(req.body.constructor === Object && Object.keys(req).length === 0){
-        res.send(400).send({success: false, message: 'Please fill all fields'});
-    }else{
-        console.log('valid data');
-        RecordsModel.updateRecord(req.params.id, recordReqdata, (err, records)=>{
-            if(err)
+//update record by id
+exports.putRecordById = (req, res) => {
+    const user_input = new recordController(req.body);
+    console.log('user_input : ', user_input);
+
+    recordController.putRecordById(req.params.id, user_input, (err, records) => {
+        if (err)
             res.send(err);
-            res.json({status: true, message: 'Record updated successfully'})
-        })
-    }
+        res.json({ message: 'Record updated successfully' })
+    })
 }
 
-//delete a record
-exports.deleteRecord = (req, res)=>{
-    RecordsModel.deleteRecord(req.params.id, (err, records)=>{
-        if(err)
-        res.send(err);
-        res.json({success: true, message: 'Record deleted successfully'});
+//delete record by id
+exports.deleteRecord = (req, res) => {
+    recordController.deleteRecord(req.params.id, (err, records) => {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Record deleted successfully' });
     })
 }

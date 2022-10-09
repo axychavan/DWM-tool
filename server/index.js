@@ -22,34 +22,22 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-//import record routes
-const empinfoRoutes = require('./src/routes/empinfo.route');
-const clientinfoRoutes = require('./src/routes/clientinfo.route');
-const ctmapinfoRoutes = require('./src/routes/ctmapinfo.route');
-const tasksRoutes = require('./src/routes/tasksinfo.route');
-const transactinfoRoutes = require('./src/routes/transactinfo.route');
+//import routes
+const employeeRoutes = require('./src/routes/employee.route');
+const clientRoutes = require('./src/routes/client.route');
+const taskRoutes = require('./src/routes/task.route');
+const ctmapRoutes = require('./src/routes/ctmap.route');
+const recordsRoutes = require('./src/routes/records.route');
+
 const emergencyinfoRoutes = require('./src/routes/emergencyinfo.route');
 
-//login route
-const loginRoutes = require('./src/routes/login.route');
-
-//employee route
-const authRoutes = require('./src/routes/auth.route');
-const employeeRoutes = require('./src/routes/employee.route');
-
-//create record routes
-app.use('/api/v1/empinfo', empinfoRoutes);
-app.use('/api/v1/clientinfo', clientinfoRoutes);
-app.use('/api/v1/ctmapinfo', ctmapinfoRoutes);
-app.use('/api/v1/tasksinfo', tasksRoutes);
-app.use('/api/v1/transactinfo', transactinfoRoutes);
-app.use('/api/v1/emergencyinfo', emergencyinfoRoutes);
-
-//login middleware
-app.use('/api/v1/login', loginRoutes);
-
-//employee middleware
-app.use('/api/v1/auth', authRoutes);
+//middleware
 app.use('/api/v1/employee', employeeRoutes);
+app.use('/api/v1/client', clientRoutes);
+app.use('/api/v1/task', taskRoutes);
+app.use('/api/v1/ctmap', ctmapRoutes);
+app.use('/api/v1/records', recordsRoutes);
+
+app.use('/api/v1/emergencyinfo', emergencyinfoRoutes);
 
 app.listen(3000, () => console.log(`Listening on port ${process.env.PORT}...${tada}`));
