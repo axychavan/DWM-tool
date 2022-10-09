@@ -12,9 +12,14 @@ export class UserService {
 
   contactsUrl = 'http://localhost:3000/api/v1/emergencyinfo';
   transactUrl = 'http://localhost:3000/api/v1/transactinfo';
-  empidTransactUrl = "http://localhost:3000/api/v1/transactinfo/empid";
+  employeeRecordsUrl = "http://localhost:3000/api/v1/employee/records";
   clientUrl = "http://localhost:3000/api/v1/clientinfo";
   taskUrl = "http://localhost:3000/api/v1/tasksinfo";
+
+  ctmapUrl = "http://localhost:3000/api/v1/ctmapinfo";
+
+  //keep
+  emergency_contacts = "http://localhost:3000/api/v1/employee/emergency_contacts";
 
   constructor(private http: HttpClient) { }
 
@@ -34,12 +39,8 @@ export class UserService {
     return this.http.post<any>(this.clientinfo, client_data)
   }
 
-  getRecords() {
+  getemployeeRecords() {
     return this.http.get(this.transactUrl);
-  }
-
-  getempidRecords() {
-    return this.http.get(this.empidTransactUrl);
   }
 
   deleteRecord(id: string) {
@@ -52,5 +53,14 @@ export class UserService {
 
   postTransact(addRecord: any) {
     return this.http.post<any>(this.transactUrl, addRecord);
+  }
+
+  getctmap() {
+    return this.http.get<any>(this.ctmapUrl);
+  }
+
+  //keep
+  getEmergency_contacts() {
+    return this.http.get<any>(this.emergency_contacts);
   }
 }

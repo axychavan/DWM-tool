@@ -5,7 +5,6 @@ import { NgToastService } from 'ng-angular-popup';
 import { UserService } from '../services/user.service';
 import { AdminService } from '../services/admin.service';
 import { ClientinfoService } from '../services/clientinfo.service';
-import { CtmapService } from '../services/ctmap.service';
 import { EmergencyService } from '../services/emergency.service';
 import { EmpinfoService } from '../services/empinfo.service';
 import { TasksService } from '../services/tasks.service';
@@ -23,7 +22,6 @@ export class AdmindashboardComponent implements OnInit {
   employees: any;
   clients: any;
   tasks: any;
-  ctmap: any;
   emergency: any;
 
   addEmployee: any = {};
@@ -36,7 +34,6 @@ export class AdmindashboardComponent implements OnInit {
     private empinfoService: EmpinfoService,
     private clientinfoService: ClientinfoService,
     private tasksService: TasksService,
-    private ctmapService: CtmapService,
     private emergencyService: EmergencyService,
     private router: Router,
     private toast: NgToastService,
@@ -56,11 +53,6 @@ export class AdmindashboardComponent implements OnInit {
     this.tasksService.getTasks().subscribe((result) => {
       console.warn("Tasks", result);
       this.tasks = result;
-    })
-
-    this.ctmapService.getCTmap().subscribe((result) => {
-      console.warn("Client-Task Map", result);
-      this.ctmap = result;
     })
 
     this.emergencyService.getEmergencyContacts().subscribe((result) => {
