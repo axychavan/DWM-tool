@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -9,8 +8,13 @@ import { UserService } from '../services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
+  show: boolean = false;
+  showPassword() {
+    this.show = !this.show;
+  }
+
   user: any;
-  
+
   empidItem = localStorage.getItem('empid');
   passwordItem = localStorage.getItem('password');
   loginData: any = {
@@ -18,17 +22,11 @@ export class ProfileComponent implements OnInit {
     "password": this.passwordItem
   }
 
-  show: boolean = false;
-  showPassword() {
-    this.show = !this.show;
-  }
-
   constructor(
-    private authService: AuthService,
     private userService: UserService
   ) {
 
-    this.authService.loginUser(this.loginData).subscribe((res) => {
+    this.userService.loginUser(this.loginData).subscribe((res) => {
       console.log("Login response", res);
       this.user = res;
     })

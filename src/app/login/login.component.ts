@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +12,9 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
 
   show: boolean = false;
+  showPassword() {
+    this.show = !this.show;
+  }
 
   loginData: any = {};
 
@@ -20,20 +23,15 @@ export class LoginComponent implements OnInit {
   roleItem: any;
 
   constructor(
+    private userService: UserService,
     private router: Router,
-    private http: HttpClient,
-    private toast: NgToastService,
-    private authService: AuthService
+    private toast: NgToastService
   ) { }
-
-  showPassword() {
-    this.show = !this.show;
-  }
 
   login() {
     console.log("User Input", this.loginData.empid, this.loginData.password)
 
-    this.authService.loginUser(this.loginData).subscribe((res) => {
+    this.userService.loginUser(this.loginData).subscribe((res) => {
       console.log("Login response", res);
 
       let empidkey = res.map((item) => item.empid);

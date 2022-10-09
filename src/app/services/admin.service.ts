@@ -7,63 +7,72 @@ import { Observable } from 'rxjs';
 })
 export class AdminService {
 
-  private empinfo = 'http://localhost:3000/api/v1/empinfo';
-  private clientinfo = 'http://localhost:3000/api/v1/clientinfo';
-  private taskinfo = 'http://localhost:3000/api/v1/tasksinfo';
-  private emergencyinfo = 'http://localhost:3000/api/v1/emergencyinfo';
-
-  ctmapUrl = "http://localhost:3000/api/v1/ctmapinfo";
-  clientUrl = "http://localhost:3000/api/v1/clientinfo";
-  tasksUrl = "http://localhost:3000/api/v1/tasksinfo";
+  employee = "http://localhost:3000/api/v1/employee";
+  client = "http://localhost:3000/api/v1/client";
+  task = "http://localhost:3000/api/v1/task";
+  ctmap = "http://localhost:3000/api/v1/ctmap";
+  emergency = "http://localhost:3000/api/v1/employee/emergency"
 
   constructor(private http: HttpClient) { }
 
-  addEmployee(employee_data: any) {
-    return this.http.post<any>(this.empinfo, employee_data)
+  //Employee
+  getEmployees() {
+    return this.http.get<any>(this.employee);
+  }
+
+  addEmployee(data: any) {
+    return this.http.post<any>(this.employee, data);
+  }
+
+  updateEmployee() {
+
   }
 
   deleteEmployee(id: string) {
-    return this.http.delete(this.empinfo + '/' + id);
+    return this.http.delete(this.employee + '/' + id);
   }
 
-  addClient(client_data: any) {
-    return this.http.post<any>(this.clientinfo, client_data)
+  //Client
+  getClients() {
+    return this.http.get<any>(this.client);
+  }
+
+  addClient(data: any) {
+    return this.http.post<any>(this.employee, data);
+  }
+
+  updateClient() {
+
   }
 
   deleteClient(id: string) {
-    return this.http.delete(this.clientinfo + '/' + id);
+    return this.http.delete(this.client + '/' + id);
   }
 
-  addTask(task_data: any) {
-    return this.http.post<any>(this.taskinfo, task_data)
+  //Task
+  getTasks() {
+    return this.http.get<any>(this.task);
+  }
+
+  addTask(data: any) {
+    return this.http.post<any>(this.employee, data);
+  }
+
+  updateTask() {
+
   }
 
   deleteTask(id: string) {
-    return this.http.delete(this.taskinfo + '/' + id);
+    return this.http.delete(this.task + '/' + id);
   }
 
-  addContact(contact_data: any) {
-    return this.http.post<any>(this.emergencyinfo, contact_data)
+  getCtmap() {
+    return this.http.get<any>(this.ctmap);
   }
 
-  deleteContact(id: string) {
-    return this.http.delete(this.emergencyinfo + '/' + id);
+  //Emergency
+  getEmergency() {
+    return this.http.get<any>(this.emergency);
   }
 
-  // new apis
-  getctmap() {
-    return this.http.get<any>(this.ctmapUrl);
-  }
-
-  postctmap(data: any) {
-    return this.http.post<any>(this.ctmapUrl, data);
-  }
-
-  getClients() {
-    return this.http.get<any>(this.clientUrl);
-  }
-
-  getTasks() {
-    return this.http.get<any>(this.tasksUrl);
-  }
 }

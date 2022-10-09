@@ -103,13 +103,14 @@
         <tr *ngFor="let item of employeeSpecificRecords; let i = index">
           <td>{{i + 1}}</td>
           <td>{{item.date | date: 'dd-MM-yyyy'}}</td>
-          <td>{{item.clientname}}</td>
-          <td>{{item.taskdescription}}</td>
+          <td>{{item.cl_name}}</td>
+          <td>{{item.task}}</td>
           <td>{{item.duration}}</td>
           <td>{{item.description}}</td>
           <td>
             <button type="button" class="btn btn-outline-primary btn-sm
-                mr-2" data-toggle="modal" data-target="#updaterecord" disabled><i class="bi bi-pencil-square"></i></button>
+                mr-2" data-toggle="modal" data-target="#updaterecord" disabled><i
+                class="bi bi-pencil-square"></i></button>
             <button type="button" class="btn btn-outline-danger btn-sm" (click)=" delete_Record(item)"><i
                 class="bi bi-trash"></i></button>
           </td>
@@ -306,6 +307,20 @@
     </div>
   </div>
 </div>
+
+<label for="state">Select State : </label>
+<select (change)="onSelect($event)">
+  <option>Select State ...</option>
+  <option *ngFor="let item of state" value="{{item.id}}">{{item.name}}</option>
+</select>
+
+<br>
+
+<label for="city">Select City : </label>
+<select >
+  <option>Select City ...</option>
+  <option *ngFor="let item of city" value="{{item.id}}">{{item.name}}</option>
+</select>
 
 <app-emergencycontact></app-emergencycontact>
 

@@ -24,11 +24,11 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
-    this.userService.addEmployee(this.createEmployee).
+    /* this.userService.addEmployee(this.createEmployee).
       subscribe(
         res => {
           console.log("Employee created", res);
-        })
+        }) */
     this.router.navigate(['dashboard']);
     this.toast.success({ detail: "Signup Successful", summary: 'Account created successfully', duration: '3000' });
   }

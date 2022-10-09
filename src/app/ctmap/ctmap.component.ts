@@ -15,28 +15,28 @@ export class CtmapComponent implements OnInit {
 
   constructor(private adminService: AdminService) {
 
-    this.adminService.getctmap().subscribe((res) => {
-      this.ctmap = res;      
+    this.adminService.getCtmap().subscribe((res) => {
+      this.ctmap = res;
       console.log("CTMap response", this.ctmap);
     })
 
     this.adminService.getClients().subscribe((res) => {
-      this.clients = res;      
+      this.clients = res;
       console.log("Clients response", this.clients);
     })
 
     this.adminService.getTasks().subscribe((res) => {
-      this.tasks = res;      
+      this.tasks = res;
       console.log("Tasks response", this.tasks);
     })
   }
 
   associate_ctmap() {
-    console.log(this.associate_data.ctname);
+    /* console.log(this.associate_data.ctname);
     console.log(this.associate_data.ctdescription);    
     this.adminService.postctmap(this.associate_data).subscribe((res) => {
       console.log("association response", res);
-    })
+    }) */
     window.location.reload();
   }
 

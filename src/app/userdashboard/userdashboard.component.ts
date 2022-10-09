@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+
 import { UserService } from '../services/user.service';
 import { NgToastService } from 'ng-angular-popup';
-
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { formatDate } from '@angular/common';
 
@@ -13,6 +12,16 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./userdashboard.component.css']
 })
 export class UserdashboardComponent implements OnInit {
+
+  state: any = [];
+  city: any = [];
+
+  onSelect(state) {
+    //console.log(state.target.value);
+
+    this.city = this.userService.city().filter(e => e.id == state.target.value);
+    //console.log("City : ", this.city);
+  }
 
   user: any;
   records: any;
@@ -45,18 +54,21 @@ export class UserdashboardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
     private userService: UserService,
     private toast: NgToastService,
   ) {
+
+    this.state = this.userService.state();
+    console.log("States : ", this.state);    
+
     console.log("Current month = ", this.currMonth);
 
-    this.authService.loginUser(this.loginData).subscribe((res) => {
+    this.userService.loginUser(this.loginData).subscribe((res) => {
       console.log("Login response", res);
       this.user = res;
     })
 
-    this.userService.getemployeeRecords().subscribe((res) => {
+    this.userService.getRecords().subscribe((res) => {
       console.log("Employee Records", res);
       this.employeeRecords = res;
 
@@ -67,11 +79,6 @@ export class UserdashboardComponent implements OnInit {
       console.log("Employee Specific Records", this.employeeSpecificRecords);
     })
 
-    this.userService.getctmap().subscribe((res) => {
-      this.ctmap = res;
-      console.log("CTMap Response", this.ctmap);
-    })
-
     this.userService.getClients().subscribe((res) => {
       console.log("List of Clients", res);
       this.clients = res;
@@ -80,6 +87,11 @@ export class UserdashboardComponent implements OnInit {
     this.userService.getTasks().subscribe((res) => {
       console.log("List of Tasks", res);
       this.tasks = res;
+    })
+
+    this.userService.getCtmap().subscribe((res) => {
+      this.ctmap = res;
+      console.log("CTMap Response", this.ctmap);
     })
   }
 
@@ -95,16 +107,16 @@ export class UserdashboardComponent implements OnInit {
   add_Record() {
     console.log("Record added successfully");
 
-    this.userService.postTransact(this.addRecord).subscribe(res => {
+    this.userService.addRecord(this.addRecord).subscribe(res => {
       console.log("Record added", res);
       window.location.reload();
     })
     this.toast.success({ detail: "Success", summary: 'Record added successfully', duration: '3000' });
   }
 
-  delete_Record(item: { trid: string; }) {
+  delete_Record(item: { recid: string; }) {
     if (confirm('Are you sure you want to delete ?')) {
-      this.userService.deleteRecord(item.trid).subscribe(response => {
+      this.userService.deleteRecord(item.recid).subscribe(response => {
         this.records = this.records.filter((item: { id: any; }) => item.id !== item.id);
       });
       window.location.reload();

@@ -7,60 +7,84 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private empinfo = 'http://localhost:3000/api/v1/empinfo';
-  private clientinfo = 'http://localhost:3000/api/v1/clientinfo';
-
-  contactsUrl = 'http://localhost:3000/api/v1/emergencyinfo';
-  transactUrl = 'http://localhost:3000/api/v1/transactinfo';
-  employeeRecordsUrl = "http://localhost:3000/api/v1/employee/records";
-  clientUrl = "http://localhost:3000/api/v1/clientinfo";
-  taskUrl = "http://localhost:3000/api/v1/tasksinfo";
-
-  ctmapUrl = "http://localhost:3000/api/v1/ctmapinfo";
-
-  //keep
-  emergency_contacts = "http://localhost:3000/api/v1/employee/emergency_contacts";
+  login = "http://localhost:3000/api/v1/employee/login";
+  employee = "http://localhost:3000/api/v1/employee";
+  client = "http://localhost:3000/api/v1/client";
+  task = "http://localhost:3000/api/v1/task";
+  ctmap = "http://localhost:3000/api/v1/ctmap";
+  record = "http://localhost:3000/api/v1/records";
+  emergency = "http://localhost:3000/api/v1/employee/emergency";
 
   constructor(private http: HttpClient) { }
 
-  addEmployee(employee_data: any) {
-    return this.http.post<any>(this.empinfo, employee_data)
+  loginUser(data: any) {
+    return this.http.post<any>(this.login, data);
+  }
+
+  getEmployees() {
+    return this.http.get<any>(this.employee);
   }
 
   getClients() {
-    return this.http.get(this.clientUrl);
+    return this.http.get<any>(this.client);
   }
 
   getTasks() {
-    return this.http.get(this.taskUrl);
+    return this.http.get<any>(this.task);
   }
 
-  addClient(client_data: any) {
-    return this.http.post<any>(this.clientinfo, client_data)
+  getCtmap() {
+    return this.http.get<any>(this.ctmap);
   }
 
-  getemployeeRecords() {
-    return this.http.get(this.transactUrl);
+  //records
+  getRecords() {
+    return this.http.get<any>(this.record);
+  }
+
+  addRecord(data: any) {
+    return this.http.post<any>(this.record, data);
   }
 
   deleteRecord(id: string) {
-    return this.http.delete(this.transactUrl + '/' + id);
+    return this.http.delete(this.record + '/' + id);
   }
 
-  getContacts() {
-    return this.http.get(this.contactsUrl);
+  getEmergency() {
+    return this.http.get<any>(this.emergency);
   }
 
-  postTransact(addRecord: any) {
-    return this.http.post<any>(this.transactUrl, addRecord);
+  state() {
+    return [
+      {
+        id: 1,
+        name: "Maharashtra"
+      },
+      {
+        id: 2,
+        name: "Gujarat"
+      }
+    ]
   }
 
-  getctmap() {
-    return this.http.get<any>(this.ctmapUrl);
+  city() {
+    return [
+      {
+        id: 1,
+        name: "Pune"
+      },
+      {
+        id: 1,
+        name: "Mumbai"
+      },
+      {
+        id: 2,
+        name: "Surat"
+      }
+    ]
   }
 
-  //keep
-  getEmergency_contacts() {
-    return this.http.get<any>(this.emergency_contacts);
-  }
+
+
+
 }
