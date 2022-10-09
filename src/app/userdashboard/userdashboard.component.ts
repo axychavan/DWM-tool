@@ -13,21 +13,13 @@ import { formatDate } from '@angular/common';
 })
 export class UserdashboardComponent implements OnInit {
 
-  state: any = [];
-  city: any = [];
-
-  onSelect(state) {
-    //console.log(state.target.value);
-
-    this.city = this.userService.city().filter(e => e.id == state.target.value);
-    //console.log("City : ", this.city);
-  }
-
   user: any;
   records: any;
   ctmap: any;
+
   clients: any;
   tasks: any;
+  task_list: any = [];
   //todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
   currMonth = formatDate(new Date(), 'yyyy-MM', 'en');
 
@@ -57,10 +49,6 @@ export class UserdashboardComponent implements OnInit {
     private userService: UserService,
     private toast: NgToastService,
   ) {
-
-    this.state = this.userService.state();
-    console.log("States : ", this.state);    
-
     console.log("Current month = ", this.currMonth);
 
     this.userService.loginUser(this.loginData).subscribe((res) => {
@@ -112,6 +100,13 @@ export class UserdashboardComponent implements OnInit {
       window.location.reload();
     })
     this.toast.success({ detail: "Success", summary: 'Record added successfully', duration: '3000' });
+  }
+
+  selectClient(clients) {
+    //console.log(clients.target.value);
+
+    this.task_list = this.ctmap.filter(e => e.cl_name == clients.target.value);
+    //console.log("List of tasks : ", this.task_list);
   }
 
   delete_Record(item: { recid: string; }) {

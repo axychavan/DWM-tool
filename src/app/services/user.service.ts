@@ -54,37 +54,4 @@ export class UserService {
     return this.http.get<any>(this.emergency);
   }
 
-  state() {
-    return [
-      {
-        id: 1,
-        name: "Maharashtra"
-      },
-      {
-        id: 2,
-        name: "Gujarat"
-      }
-    ]
-  }
-
-  city() {
-    return [
-      {
-        id: 1,
-        name: "Pune"
-      },
-      {
-        id: 1,
-        name: "Mumbai"
-      },
-      {
-        id: 2,
-        name: "Surat"
-      }
-    ]
-  }
-
-
-
-
 }
