@@ -21,6 +21,11 @@ export class UserService {
     return this.http.post<any>(this.login, data);
   }
 
+  //update user
+  putUser(empid: any, data: any) {
+    return this.http.put<any>(this.employee + '/' + empid, data)
+  }
+
   getEmployees() {
     return this.http.get<any>(this.employee);
   }

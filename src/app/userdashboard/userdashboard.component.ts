@@ -12,15 +12,18 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./userdashboard.component.css']
 })
 export class UserdashboardComponent implements OnInit {
-
+  
   user: any;
+  employeeRecords: any;
+  employeeSpecificRecords: any;
+  sortRecords: any;
+  
   records: any;
   ctmap: any;
-
   clients: any;
   tasks: any;
   task_list: any = [];
-  //todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+  month: any;
   currMonth = formatDate(new Date(), 'yyyy-MM', 'en');
 
   empidItem = localStorage.getItem('empid');
@@ -28,16 +31,11 @@ export class UserdashboardComponent implements OnInit {
   loginData: any = {
     "empid": this.empidItem,
     "password": this.passwordItem
-  }
-
-  month: any;
+  }  
 
   addRecord: any = {
     "empid": this.empidItem
   };
-  employeeRecords: any;
-  employeeSpecificRecords: any;
-  sortRecords: any;
 
   show: boolean = false;
   showPassword() {
@@ -49,7 +47,8 @@ export class UserdashboardComponent implements OnInit {
     private userService: UserService,
     private toast: NgToastService,
   ) {
-    console.log("Current month = ", this.currMonth);
+
+    this.month =this.currMonth;
 
     this.userService.loginUser(this.loginData).subscribe((res) => {
       console.log("Login response", res);
@@ -127,7 +126,7 @@ export class UserdashboardComponent implements OnInit {
       showTitle: true,
       title: 'Daily Work Management records',
       useBom: true,
-      headers: ["ID", "Date", "Employee ID", "Client", "Task", "Duration", "Description"],
+      headers: ["ID", "Employee ID", "Date", "Client", "Task", "Duration", "Description"],
       eol: '\n'
     };
     new ngxCsv(this.employeeSpecificRecords, "dwm_report", options);
