@@ -11,13 +11,13 @@ export class EmergencycontactComponent implements OnInit {
   contacts: any;
 
   constructor(private userService: UserService) {
+
     this.userService.getEmergency().subscribe((res) => {
-      console.log("Emergency Contacts", res);
       this.contacts = res;
+      console.log("Emergency Contacts", this.contacts);
     })
+    
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }

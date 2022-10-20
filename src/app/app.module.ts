@@ -12,8 +12,10 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
-import { EmergencycontactComponent } from './emergencycontact/emergencycontact.component';
+import { EmergencycontactComponent } from './emergency-contact/emergencycontact.component';
 import { CtmapComponent } from './ctmap/ctmap.component';
+import { RecordsComponent } from './records/records.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { CtmapComponent } from './ctmap/ctmap.component';
     FooterComponent,
     ProfileComponent,
     EmergencycontactComponent,
-    CtmapComponent
+    CtmapComponent,
+    RecordsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -9,11 +9,6 @@ import { UserService } from '../services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  show: boolean = false;
-  showPassword() {
-    this.show = !this.show;
-  }
-
   user: any;
   putUser: any = {};
 
@@ -32,9 +27,6 @@ export class ProfileComponent implements OnInit {
     this.userService.loginUser(this.loginData).subscribe((res) => {
       this.user = res;
       console.log("Login response", this.user);
-
-      this.putUser.name = this.user.name;
-      console.log("Test 1", this.putUser.name)
     })
   }
 
@@ -49,11 +41,8 @@ export class ProfileComponent implements OnInit {
           console.warn("patch request (user)", res);
           window.location.reload();
         })
-
     this.toast.success({ detail: "Success", summary: "User Profile updated.", duration: 4000 });
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }

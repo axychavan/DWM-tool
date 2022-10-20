@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       //console.log("role", this.roleItem);
 
       if (this.roleItem == "employee") {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['dashboard/records']);
         this.toast.success({ detail: "Login Successful", summary: 'Welcome back !', duration: '3000' });
       } else if (this.roleItem == "admin") {
         this.router.navigate(['admindashboard']);
