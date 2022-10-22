@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
-
 import { AppRoutingModule } from './app-routing.module';
+import { AdminModule } from './admin/admin.module';
+
 import { AppComponent } from './app.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
@@ -35,8 +37,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    RouterModule,
     FormsModule,
-    NgToastModule
+    NgToastModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,106 @@
+<!-- Tasks Card -->
+<h3 class="mb-3">
+    Tasks
+    <div style="float: right;">
+        <button type="button" class="btn btn-sm btn-outline-primary
+            mb-4" style="float: right;" data-toggle="modal" data-target="#addtask">
+            <i class="bi bi-plus-lg"></i> Add
+        </button>
+    </div>
+</h3>
+<div style="height: auto; overflow: auto;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Task ID</th>
+                <th scope="col">Description</th>
+                <th scope="col">Functions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of tasks; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{item.taskid}}</td>
+                <td>{{item.task}}</td>
+                <td>
+                    <button type="button" class="btn
+                      btn-outline-primary btn-sm mr-2" data-toggle="modal" data-target="#updatetask"><i
+                            class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn
+                      btn-outline-danger btn-sm" (click)=" delete_Task(item)"><i class="bi bi-trash"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Add Task -->
+<div class="modal fade" id="addtask" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><i class="bi bi-clipboard-plus"></i> Add Task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="taskid">Task ID</label>
+                        <input [(ngModel)]="addTask.taskid" type="text" class="form-control" id="taskid"
+                            placeholder="Task ID (Optional)">
+                    </div>
+                </div>
+                <div class="form-group" [class.has-error]="taskControl.invalid && taskControl.touched">
+                    <label for="task">Description</label>
+                    <textarea [(ngModel)]="addTask.task" class="form-control" id="task" rows="2"
+                        placeholder="Description" #taskControl="ngModel" required></textarea>
+                    <small class="text-danger" *ngIf="taskControl.invalid && taskControl.touched">
+                        Please provide a task description.
+                    </small>
+                </div>
+                
+                <div class="text-center">
+                    <button type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal"
+                        (click)="add_task()" [disabled]="!taskControl.valid"><i class="bi bi-plus"></i>
+                        Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update Task -->
+<div class="modal fade" id="updatetask" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Update Task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="taskid">Task ID</label>
+                        <input type="text" class="form-control" id="taskid" placeholder="Task ID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" rows="2" placeholder="Description"></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success" data-dismiss="modal"
+                        (click)="update_task()"><i class="bi bi-clipboard-check"></i>
+                        Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

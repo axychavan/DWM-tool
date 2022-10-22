@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['dashboard/records']);
         this.toast.success({ detail: "Login Successful", summary: 'Welcome back !', duration: '3000' });
       } else if (this.roleItem == "admin") {
-        this.router.navigate(['admindashboard']);
+        this.router.navigate(['admin-dashboard']);
         this.toast.success({ detail: "Login Successful", summary: 'Logged as an Admin', duration: '3000' });
       } else {
         this.toast.error({ detail: "Login Failed", summary: 'Please enter correct credentials', duration: '3000' });

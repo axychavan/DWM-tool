@@ -11,7 +11,6 @@ export class AdminService {
   client = "http://localhost:3000/api/v1/client";
   task = "http://localhost:3000/api/v1/task";
   ctmap = "http://localhost:3000/api/v1/ctmap";
-  emergency = "http://localhost:3000/api/v1/employee/emergency"
 
   constructor(private http: HttpClient) { }
 
@@ -38,7 +37,7 @@ export class AdminService {
   }
 
   addClient(data: any) {
-    return this.http.post<any>(this.employee, data);
+    return this.http.post<any>(this.client, data);
   }
 
   updateClient() {
@@ -55,7 +54,7 @@ export class AdminService {
   }
 
   addTask(data: any) {
-    return this.http.post<any>(this.employee, data);
+    return this.http.post<any>(this.task, data);
   }
 
   updateTask() {
@@ -68,11 +67,6 @@ export class AdminService {
 
   getCtmap() {
     return this.http.get<any>(this.ctmap);
-  }
-
-  //Emergency
-  getEmergency() {
-    return this.http.get<any>(this.emergency);
   }
 
 }

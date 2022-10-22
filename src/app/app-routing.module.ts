@@ -7,11 +7,20 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
 import { ProfileComponent } from './profile/profile.component';
 import { RecordsComponent } from './records/records.component';
 import { EmergencycontactComponent } from './emergency-contact/emergencycontact.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { EmployeesComponent } from './admin/employees/employees.component';
+import { ClientsComponent } from './admin/clients/clients.component';
+import { TasksComponent } from './admin/tasks/tasks.component';
+import { CtmapComponent } from './ctmap/ctmap.component';
 
 const routes: Routes = [
+
+  // Auth Module
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+
+  // User Module
   { path: 'dashboard', redirectTo: 'dashboard/records', pathMatch: 'full' },
   {
     path: 'dashboard',
@@ -22,7 +31,20 @@ const routes: Routes = [
       { path: 'emergency-contacts', component: EmergencycontactComponent }
     ]
   },
-  { path: 'admindashboard', component: AdmindashboardComponent }
+
+  // Admin Module
+  { path: 'admin-dashboard', redirectTo: 'admin-dashboard/employees', pathMatch: 'full' },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    children: [
+      { path: 'employees', component: EmployeesComponent },
+      { path: 'clients', component: ClientsComponent },
+      { path: 'tasks', component: TasksComponent },
+      { path: 'ctmap', component: CtmapComponent }
+    ]
+  },
 ];
 
 @NgModule({

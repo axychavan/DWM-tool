@@ -17,7 +17,6 @@ export class AdmindashboardComponent implements OnInit {
   employees: any;
   clients: any;
   tasks: any;
-  emergency: any;
 
   addEmployee: any = {};
   addClient: any = {};
@@ -43,11 +42,6 @@ export class AdmindashboardComponent implements OnInit {
     this.adminService.getTasks().subscribe((result) => {
       console.warn("Tasks", result);
       this.tasks = result;
-    })
-
-    this.adminService.getEmergency().subscribe((result) => {
-      console.warn("Emergency Contacts", result);
-      this.emergency = result;
     })
   }
 
