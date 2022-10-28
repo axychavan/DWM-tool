@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
-import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RecordsComponent } from './records/records.component';
 import { EmergencycontactComponent } from './emergency-contact/emergencycontact.component';
@@ -11,7 +10,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { EmployeesComponent } from './admin/employees/employees.component';
 import { ClientsComponent } from './admin/clients/clients.component';
 import { TasksComponent } from './admin/tasks/tasks.component';
-import { CtmapComponent } from './ctmap/ctmap.component';
+import { CtmapComponent } from './admin/ctmap/ctmap.component';
 
 const routes: Routes = [
 

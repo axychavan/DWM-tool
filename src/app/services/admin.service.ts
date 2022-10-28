@@ -69,4 +69,12 @@ export class AdminService {
     return this.http.get<any>(this.ctmap);
   }
 
+  associateCtmap(data: any) {
+    return this.http.post<any>(this.ctmap, data);
+  }
+
+  deleteCtmap(id: string) {
+    return this.http.delete(this.ctmap + '/' + id);
+  }
+
 }

@@ -56,7 +56,7 @@
                             <select [(ngModel)]="associate_data.ctname" name="ctname" id="ctname"
                                 class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;"
                                 #ctnameControl="ngModel" required>
-                                <option class="dropdown-item">Select a Client ...</option>
+                                <option class="dropdown-item" disabled>Select a Client ...</option>
                                 <option class="dropdown-item" *ngFor="let item of clients">{{item.name}}</option>
                             </select>
                         </div>
@@ -65,11 +65,13 @@
                         </small>
                     </div>
 
-                    <div class="form-group col-md-6" [class.has-error]="ctdescriptionControl.invalid && ctdescriptionControl.touched">
+                    <div class="form-group col-md-6"
+                        [class.has-error]="ctdescriptionControl.invalid && ctdescriptionControl.touched">
                         <label for="description">Task</label>
                         <div class="dropdown">
                             <select [(ngModel)]="associate_data.ctdescription" name="description" id="description"
-                                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;" #ctdescriptionControl="ngModel" required>
+                                class="btn btn-light dropdown-toggle" style="width: 100%; text-align: left;"
+                                #ctdescriptionControl="ngModel" required>
                                 <option class="dropdown-item">Select a Task ...</option>
                                 <option class="dropdown-item" *ngFor="let item of tasks">{{item.description}}</option>
                             </select>
@@ -79,12 +81,13 @@
                         </small>
                     </div>
                 </div>
-
                 <div class="text-center">
                     <button type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal"
-                        (click)="associate_ctmap()" [disabled]="!ctnameControl.valid || !ctdescriptionControl.valid"><i class="bi bi-link-45deg"></i> Associate</button>
+                        (click)="associate_ctmap()" [disabled]="!ctnameControl.valid || !ctdescriptionControl.valid"><i
+                            class="bi bi-link-45deg"></i> Associate</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

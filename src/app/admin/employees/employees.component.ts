@@ -14,6 +14,11 @@ export class EmployeesComponent implements OnInit {
   employees: any;
   addEmployee: any = {};
 
+  show: boolean = false;
+  showPassword() {
+    this.show = !this.show;
+  }
+
   constructor(
     private toast: NgToastService,
     private adminService: AdminService
@@ -46,7 +51,7 @@ export class EmployeesComponent implements OnInit {
   delete_Employee(item: { empid: string; }) {
     if (confirm('Are you sure you want to delete ?')) {
       this.adminService.deleteEmployee(item.empid)
-        .subscribe(response => {
+        .subscribe(() => {
           this.employees = this.employees.filter((item: { id: any; }) => item.id !== item.id);
         });
       window.location.reload();

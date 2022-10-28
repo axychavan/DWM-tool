@@ -9,6 +9,7 @@ import { CtmapComponent } from './ctmap/ctmap.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { ClientsComponent } from './clients/clients.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { AdminFooterComponent } from './admin-footer/admin-footer.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TasksComponent } from './tasks/tasks.component';
     CtmapComponent,
     EmployeesComponent,
     ClientsComponent,
-    TasksComponent
+    TasksComponent,
+    AdminFooterComponent
   ],
   imports: [
     CommonModule,
