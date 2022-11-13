@@ -1,0 +1,182 @@
+<!-- Employee Card -->
+<div class="card m-3">
+    <div class="card-body">
+        <h3 class="mb-3">
+            Employees
+            <div style="float: right;">
+                <button type="button" class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal"
+                    data-target="#addemployee">
+                    <i class="bi bi-plus-lg"></i> Add
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-success" (click)="employees_csv()">
+                    <i class="bi bi-arrow-down-short"></i> Download .csv
+                </button>
+            </div>
+        </h3>
+        <div style="height: 525px; overflow: auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Employee ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Designation</th>
+                        <th scope="col">Date of Joining</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Functions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of employees">
+                        <td>{{item.empid}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.designation}}</td>
+                        <td>{{item.doj | date: 'dd-MM-yyyy'}}</td>
+                        <td>{{item.role}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary btn-sm mr-2" data-toggle="modal"
+                                data-target="#updateemployee">
+                                <i class="bi bi-pencil-square"></i></button>
+                            <button type="button" class="btn btn-outline-danger btn-sm" (click)=" delete_Employee(item)">
+                                <i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Add Employee -->
+<div class="modal fade" id="addemployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><i class="bi bi-person-plus-fill"></i> Add Employee
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col" [class.has-error]="empidControl.invalid && empidControl.touched">
+                        <label for="empid">Emp ID</label>
+                        <input [(ngModel)]="addEmployee.empid" type="text" class="form-control" id="empid"
+                            placeholder="Emp ID" #empidControl="ngModel" required>
+                        <small class="text-danger" *ngIf="empidControl.invalid && empidControl.touched">
+                            Please enter the employee id.
+                        </small>
+                    </div>
+                    <div class="form-group col" [class.has-error]="nameControl.invalid && nameControl.touched">
+                        <label for="name">Name</label>
+                        <input [(ngModel)]="addEmployee.name" type="text" class="form-control" id="name"
+                            placeholder="Name" #nameControl="ngModel" required>
+                        <small class="text-danger" *ngIf="nameControl.invalid && nameControl.touched">
+                            Please enter the name.
+                        </small>
+                    </div>
+                    <div class="form-group col" [class.has-error]="emailControl.invalid && emailControl.touched">
+                        <label for="email">Email Address</label>
+                        <input [(ngModel)]="addEmployee.email" type="email" class="form-control" id="email"
+                            placeholder="Email" #emailControl="ngModel" required>
+                        <small class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">
+                            Please enter the email address.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col" [class.has-error]="phoneControl.invalid && phoneControl.touched">
+                        <label for="phone">Phone number</label>
+                        <input [(ngModel)]="addEmployee.phone" type="text" class="form-control" id="phone"
+                            placeholder="Phone number" #phoneControl="ngModel" required>
+                        <small class="text-danger" *ngIf="phoneControl.invalid && phoneControl.touched">
+                            Please enter the phone number.
+                        </small>
+                    </div>
+                    <div class="form-group col"
+                        [class.has-error]="designationControl.invalid && designationControl.touched">
+                        <label for="designation">Designation</label>
+                        <input [(ngModel)]="addEmployee.designation" type="text" class="form-control" id="designation"
+                            placeholder="Designation" #designationControl="ngModel" required>
+                        <small class="text-danger" *ngIf="designationControl.invalid && designationControl.touched">
+                            Please enter the designation.
+                        </small>
+                    </div>
+
+                    <div class="form-group col" [class.has-error]="dojControl.invalid && dojControl.touched">
+                        <label for="doj">Date of Joining</label>
+                        <input [(ngModel)]="addEmployee.doj" #dojControl="ngModel" type="date" class="form-control"
+                            onfocus="this.max = new Date().toISOString().split('T')[0]" id="doj" required>
+                        <small class="text-danger" *ngIf="dojControl.invalid && dojControl.touched">
+                            Please select the date of joining.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col" [class.has-error]="passwordControl.invalid && passwordControl.touched">
+                        <label for="password">Password</label>
+                        <input [(ngModel)]="addEmployee.password" [type]="show ? 'text' : 'password'"
+                            class="form-control" id="password" placeholder="Password" #passwordControl="ngModel"
+                            required>
+                        <small class="text-danger" *ngIf="passwordControl.invalid && passwordControl.touched">
+                            Please enter the password.
+                        </small>
+                    </div>
+
+                    <div class="form-group col" [class.has-error]="roleControl.invalid && roleControl.touched">
+                        <label for="role">Role</label>
+                        <div class="dropdown">
+
+                            <select [(ngModel)]="addEmployee.role" name="role" id="role" class="form-select"
+                                aria-label="Default select example" #roleControl="ngModel" required>
+                                <option class="dropdown-item" selected disabled>Select a role ...</option>
+                                <option class="dropdown-item" value="employee">Employee</option>
+                                <option class="dropdown-item" value="admin">Admin</option>
+                                <option class="dropdown-item" value="super">Super user</option>
+                            </select>
+                        </div>
+                        <small class="text-danger" *ngIf="roleControl.invalid && roleControl.touched">
+                            Please select the role.
+                        </small>
+                    </div>
+
+                    <div class="form-group col">
+                        <label for="emergency">Emergency Contact</label>
+                        <div class="form-check mt-2">
+                            <input [(ngModel)]="addEmployee.emergency" name="emergency" id="emergency"
+                                class="form-check-input" type="radio" name="inlineRadioOptions" id="yes" value="yes">
+                            <label class="form-check-label" for="yes">Yes</label>
+                            <div>
+                                <input [(ngModel)]="addEmployee.emergency" name="emergency" id="emergency"
+                                    class="form-check-input" type="radio" name="inlineRadioOptions" id="no" value="no"
+                                    checked="checked">
+                                <label class="form-check-label" for="no">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group col-md-6">
+                        <input class="form-check-input" type="checkbox" id="show">
+                        <label class="form-check-label" for="show" style="cursor: pointer;user-select:none;"
+                            (click)="showPassword()">show</label>
+                    </div> -->
+                </div>
+
+                <div class="text-center">
+                    <button type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal"
+                        [disabled]="!empidControl.valid || !nameControl.valid || !emailControl.valid || !phoneControl.valid || !designationControl.valid || !dojControl.valid || !passwordControl.valid"
+                        (click)="add_employee()">
+                        <i class="bi bi-plus"></i> Add Employee
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

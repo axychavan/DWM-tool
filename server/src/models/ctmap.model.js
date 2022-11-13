@@ -2,8 +2,8 @@ var dbConn = require('../config/db.config');
 
 var ctmapModel = function (item) {
     this.mapid = item.mapid;
-    this.clientid = item.clientid;
-    this.taskid = item.taskid;
+    this.cl_name = item.cl_name;
+    this.task = item.task;
 }
 
 //get all ctmaps
@@ -46,8 +46,8 @@ ctmapModel.postNewCtmap = (user_input, result) => {
 }
 
 //update ctmap by id
-ctmapModel.putCtmapById = (ctmapid, user_input, result) => {
-    dbConn.query("UPDATE ctmap SET clientid=?, taskid=? WHERE mapid=?", [user_input.clientid, user_input.taskid, ctmapid],
+ctmapModel.putCtmapById = (mapid, user_input, result) => {
+    dbConn.query("UPDATE ctmap SET cl_name=?, task=? WHERE mapid=?", [user_input.cl_name, user_input.task, mapid],
         (err, res) => {
             if (err) {
                 console.log('Error while updating a ctmap');

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
+
+import { UserService } from '../user/services/user.service';
 import { NgToastService } from 'ng-angular-popup';
 
 @Component({
@@ -24,11 +25,11 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
-    this.userService.addEmployee(this.createEmployee).
+    /* this.userService.addEmployee(this.createEmployee).
       subscribe(
         res => {
           console.log("Employee created", res);
-        })
+        }) */
     this.router.navigate(['dashboard']);
     this.toast.success({ detail: "Signup Successful", summary: 'Account created successfully', duration: '3000' });
   }
