@@ -5,33 +5,18 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
 import { AppRoutingModule } from './app-routing.module';
-import { AdminModule } from './admin/admin.module';
 
 import { AppComponent } from './app.component';
-import { UserdashboardComponent } from './userdashboard/userdashboard.component';
-import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
-import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { FooterComponent } from './footer/footer.component';
-import { ProfileComponent } from './profile/profile.component';
-import { EmergencycontactComponent } from './emergency-contact/emergencycontact.component';
-import { CtmapComponent } from './ctmap/ctmap.component';
-import { RecordsComponent } from './records/records.component';
-import { NavbarComponent } from './navbar/navbar.component';
+
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserdashboardComponent,
-    AdmindashboardComponent,
-    LoginComponent,
-    SignupComponent,
-    FooterComponent,
-    ProfileComponent,
-    EmergencycontactComponent,
-    CtmapComponent,
-    RecordsComponent,
-    NavbarComponent
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +25,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     RouterModule,
     FormsModule,
     NgToastModule,
+    AuthModule,
+    UserModule,
     AdminModule
   ],
   providers: [],

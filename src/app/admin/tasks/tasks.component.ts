@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
-import { AdminService } from 'src/app/services/admin.service';
+import { AdminService } from '../services/admin.service';
 
 @Component({
   selector: 'app-tasks',

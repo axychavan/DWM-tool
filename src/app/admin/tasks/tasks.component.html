@@ -1,38 +1,43 @@
 <!-- Tasks Card -->
-<h3 class="mb-3">
-    Tasks
-    <div style="float: right;">
-        <button type="button" class="btn btn-sm btn-outline-primary
-            mb-4" style="float: right;" data-toggle="modal" data-target="#addtask">
-            <i class="bi bi-plus-lg"></i> Add
-        </button>
+<div class="card m-3">
+    <div class="card-body">
+        <h3 class="mb-3">
+            Tasks
+            <div style="float: right;">
+                <button type="button" class="btn btn-sm btn-outline-primary
+                    mb-4" style="float: right;" data-toggle="modal" data-target="#addtask">
+                    <i class="bi bi-plus-lg"></i> Add
+                </button>
+            </div>
+        </h3>
+        <div style="height: auto; overflow: auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Task ID</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Functions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of tasks; let i = index">
+                        <td>{{i + 1}}</td>
+                        <td>{{item.taskid}}</td>
+                        <td>{{item.task}}</td>
+                        <td>
+                            <button type="button" class="btn
+                              btn-outline-primary btn-sm mr-2" data-toggle="modal" data-target="#updatetask"><i
+                                    class="bi bi-pencil-square"></i></button>
+                            <button type="button" class="btn
+                              btn-outline-danger btn-sm" (click)=" delete_Task(item)"><i
+                                    class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</h3>
-<div style="height: auto; overflow: auto;">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Task ID</th>
-                <th scope="col">Description</th>
-                <th scope="col">Functions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of tasks; let i = index">
-                <td>{{i + 1}}</td>
-                <td>{{item.taskid}}</td>
-                <td>{{item.task}}</td>
-                <td>
-                    <button type="button" class="btn
-                      btn-outline-primary btn-sm mr-2" data-toggle="modal" data-target="#updatetask"><i
-                            class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn
-                      btn-outline-danger btn-sm" (click)=" delete_Task(item)"><i class="bi bi-trash"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </div>
 
 <!-- Add Task -->
@@ -62,7 +67,7 @@
                         Please provide a task description.
                     </small>
                 </div>
-                
+
                 <div class="text-center">
                     <button type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal"
                         (click)="add_task()" [disabled]="!taskControl.valid"><i class="bi bi-plus"></i>

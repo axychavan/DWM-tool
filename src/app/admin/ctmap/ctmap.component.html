@@ -1,71 +1,110 @@
 <!-- Ctmap Card -->
-<h3 class="mb-3">
-    Client-Task Mapping
-</h3>
+<div class="card m-3">
+    <div class="card-body">
+        <h3 class="mb-3">
+            Client-Task Mapping
+        </h3>
 
-<!-- Associate dropdowns -->
-<div class="row">
-    <div class="col">
-        <div class="form-group" [class.has-error]="cl_nameControl.invalid && cl_nameControl.touched">
-            <label for="cl_name">Client</label>
-            <div class="dropdown">
-                <select [(ngModel)]="associate_data.cl_name" name="cl_name" id="cl_name"
-                    class="btn btn-light dropdown-toggle" style="text-align: left;" #cl_nameControl="ngModel" required>
-                    <option class="dropdown-item">Select a Client ...</option>
-                    <option class="dropdown-item" *ngFor="let item of clients">{{item.cl_name}}</option>
-                </select>
+        <!-- <div class="row">
+            <div class="col">
+                <div class="form-group" [class.has-error]="cl_nameControl.invalid && cl_nameControl.touched">
+                    <label for="cl_name">Client</label>
+                    <div class="dropdown">
+                        <select [(ngModel)]="associate_data.cl_name" name="cl_name" id="cl_name"
+                            class="btn btn-light dropdown-toggle" style="text-align: left;" #cl_nameControl="ngModel" required>
+                            <option class="dropdown-item">Select a Client ...</option>
+                            <option class="dropdown-item" *ngFor="let item of clients">{{item.cl_name}}</option>
+                        </select>
+                    </div>
+                    <small class="text-danger" *ngIf="cl_nameControl.invalid && cl_nameControl.touched">
+                        Please select a client.
+                    </small>
+                </div>
             </div>
-            <small class="text-danger" *ngIf="cl_nameControl.invalid && cl_nameControl.touched">
-                Please select a client.
-            </small>
+
+            <div class="col">
+                <div class="form-group" [class.has-error]="taskControl.invalid && taskControl.touched">
+                    <label for="description">Task</label>
+                    <div class="dropdown">
+                        <select [(ngModel)]="associate_data.task" name="description" id="description"
+                            class="btn btn-light dropdown-toggle" style="text-align: left;" #taskControl="ngModel" required>
+                            <option class="dropdown-item">Select a Task ...</option>
+                            <option class="dropdown-item" *ngFor="let item of tasks">{{item.task}}</option>
+                        </select>
+                    </div>
+                    <small class="text-danger" *ngIf="taskControl.invalid && taskControl.touched">
+                        Please select a task.
+                    </small>
+                </div>
+            </div>
+
+            <div class="col mt-3">
+                <button type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal"
+                    (click)="associate_ctmap()" [disabled]="!cl_nameControl.valid || !taskControl.valid">
+                    <i class="bi bi-link-45deg"></i> Associate
+                </button>
+            </div>
+        </div> -->
+
+        <div class="row g-2 mb-3">
+            <div class="col-auto">
+                <div class="form-floating" [class.has-error]="cl_nameControl.invalid && cl_nameControl.touched"
+                    style="width: 200px;">
+                    <select class="form-select" [(ngModel)]="associate_data.cl_name" name="cl_name" id="cl_name"
+                        aria-label="Floating label select example" #cl_nameControl="ngModel" required>
+                        <option class="dropdown-item">Select a Client ...</option>
+                        <option class="dropdown-item" *ngFor="let item of clients">{{item.cl_name}}</option>
+                    </select>
+                    <label for="client">Client</label>
+                    <small class="text-danger" *ngIf="cl_nameControl.invalid && cl_nameControl.touched">
+                        Please select a client.
+                    </small>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-floating" [class.has-error]="taskControl.invalid && taskControl.touched"
+                    style="width: 200px;">
+                    <select class="form-select" [(ngModel)]="associate_data.task" name="description" id="description"
+                        aria-label="Floating label select example" #taskControl="ngModel" required>
+                        <option class="dropdown-item">Select a Task ...</option>
+                        <option class="dropdown-item" *ngFor="let item of tasks">{{item.task}}</option>
+                    </select>
+                    <label for="task">Task</label>
+                    <small class="text-danger" *ngIf="taskControl.invalid && taskControl.touched">
+                        Please select a task.
+                    </small>
+                </div>
+            </div>
+            <div class="col mt-4">
+                <button type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal"
+                    (click)="associate_ctmap()" [disabled]="!cl_nameControl.valid || !taskControl.valid">
+                    <i class="bi bi-link-45deg"></i> Associate
+                </button>
+            </div>
+        </div>
+
+        <div style="height: auto; overflow: auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Task</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of ctmap ; let i=index">
+                        <td>{{i + 1}}</td>
+                        <td>{{item.cl_name}}</td>
+                        <td>{{item.task}}</td>
+                        <td>
+                            <button type="button" class="btn
+                      btn-outline-danger btn-sm" (click)=" delete_Ctmap(item)"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-
-    <div class="col">
-        <div class="form-group" [class.has-error]="taskControl.invalid && taskControl.touched">
-            <label for="description">Task</label>
-            <div class="dropdown">
-                <select [(ngModel)]="associate_data.task" name="description" id="description"
-                    class="btn btn-light dropdown-toggle" style="text-align: left;" #taskControl="ngModel" required>
-                    <option class="dropdown-item">Select a Task ...</option>
-                    <option class="dropdown-item" *ngFor="let item of tasks">{{item.task}}</option>
-                </select>
-            </div>
-            <small class="text-danger" *ngIf="taskControl.invalid && taskControl.touched">
-                Please select a task.
-            </small>
-        </div>
-    </div>
-
-    <div class="col mt-3">
-        <button type="button" class="btn btn-sm btn-outline-success" data-dismiss="modal" (click)="associate_ctmap()"
-            [disabled]="!cl_nameControl.valid || !taskControl.valid">
-            <i class="bi bi-link-45deg"></i> Associate
-        </button>
-    </div>
-</div>
-
-<!-- Ctmap Table -->
-<div style="height: auto; overflow: auto;">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Client</th>
-                <th scope="col">Task</th>
-                <th scope="col">Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of ctmap ; let i=index">
-                <td>{{i + 1}}</td>
-                <td>{{item.cl_name}}</td>
-                <td>{{item.task}}</td>
-                <td>
-                    <button type="button" class="btn
-              btn-outline-danger btn-sm" (click)=" delete_Ctmap(item)"><i class="bi bi-trash"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </div>

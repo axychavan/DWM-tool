@@ -1,49 +1,53 @@
 <!-- Employee Card -->
-<h3 class="mb-3">
-    Employees
-    <div style="float: right;">
-        <button type="button" class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal"
-            data-target="#addemployee">
-            <i class="bi bi-plus-lg"></i> Add
-        </button>
-        <button type="button" class="btn btn-sm btn-outline-success" (click)="employees_csv()">
-            <i class="bi bi-arrow-down-short"></i> Download .csv
-        </button>
+<div class="card m-3">
+    <div class="card-body">
+        <h3 class="mb-3">
+            Employees
+            <div style="float: right;">
+                <button type="button" class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal"
+                    data-target="#addemployee">
+                    <i class="bi bi-plus-lg"></i> Add
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-success" (click)="employees_csv()">
+                    <i class="bi bi-arrow-down-short"></i> Download .csv
+                </button>
+            </div>
+        </h3>
+        <div style="height: 525px; overflow: auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Employee ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Designation</th>
+                        <th scope="col">Date of Joining</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Functions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of employees">
+                        <td>{{item.empid}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.designation}}</td>
+                        <td>{{item.doj | date: 'dd-MM-yyyy'}}</td>
+                        <td>{{item.role}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary btn-sm mr-2" data-toggle="modal"
+                                data-target="#updateemployee">
+                                <i class="bi bi-pencil-square"></i></button>
+                            <button type="button" class="btn btn-outline-danger btn-sm" (click)=" delete_Employee(item)">
+                                <i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</h3>
-<div style="height: 525px; overflow: auto;">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Employee ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Designation</th>
-                <th scope="col">Date of Joining</th>
-                <th scope="col">Role</th>
-                <th scope="col">Functions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of employees">
-                <td>{{item.empid}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.email}}</td>
-                <td>{{item.phone}}</td>
-                <td>{{item.designation}}</td>
-                <td>{{item.doj | date: 'dd-MM-yyyy'}}</td>
-                <td>{{item.role}}</td>
-                <td>
-                    <button type="button" class="btn btn-outline-primary btn-sm mr-2" data-toggle="modal"
-                        data-target="#updateemployee">
-                        <i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" (click)=" delete_Employee(item)">
-                        <i class="bi bi-trash"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </div>
 
 <!-- Add Employee -->
@@ -146,11 +150,13 @@
                     <div class="form-group col">
                         <label for="emergency">Emergency Contact</label>
                         <div class="form-check mt-2">
-                            <input [(ngModel)]="addEmployee.emergency" name="emergency" id="emergency" class="form-check-input" type="radio" name="inlineRadioOptions" id="yes" value="yes">
+                            <input [(ngModel)]="addEmployee.emergency" name="emergency" id="emergency"
+                                class="form-check-input" type="radio" name="inlineRadioOptions" id="yes" value="yes">
                             <label class="form-check-label" for="yes">Yes</label>
                             <div>
-                                <input [(ngModel)]="addEmployee.emergency" name="emergency" id="emergency" class="form-check-input" type="radio" name="inlineRadioOptions" id="no"
-                                    value="no" checked="checked">
+                                <input [(ngModel)]="addEmployee.emergency" name="emergency" id="emergency"
+                                    class="form-check-input" type="radio" name="inlineRadioOptions" id="no" value="no"
+                                    checked="checked">
                                 <label class="form-check-label" for="no">No</label>
                             </div>
                         </div>

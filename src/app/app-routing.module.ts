@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { UserdashboardComponent } from './userdashboard/userdashboard.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RecordsComponent } from './records/records.component';
-import { EmergencycontactComponent } from './emergency-contact/emergencycontact.component';
+
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+
+import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
+import { RecordsComponent } from './user/records/records.component';
+import { EmergencyContactComponent } from './user/emergency-contact/emergency-contact.component';
+import { ProfileComponent } from './user/profile/profile.component';
+
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { EmployeesComponent } from './admin/employees/employees.component';
 import { ClientsComponent } from './admin/clients/clients.component';
@@ -23,11 +26,11 @@ const routes: Routes = [
   { path: 'dashboard', redirectTo: 'dashboard/records', pathMatch: 'full' },
   {
     path: 'dashboard',
-    component: UserdashboardComponent,
+    component: UserDashboardComponent,
     children: [
-      { path: 'profile', component: ProfileComponent },
       { path: 'records', component: RecordsComponent },
-      { path: 'emergency-contacts', component: EmergencycontactComponent }
+      { path: 'emergency-contacts', component: EmergencyContactComponent },
+      { path: 'profile', component: ProfileComponent }
     ]
   },
 
