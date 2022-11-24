@@ -82,12 +82,11 @@ export class RecordsComponent implements OnInit {
   }
 
   searchRecords() {
-    //console.log("Selected Month", this.month)
-
     console.log("Start Date : ", this.startdate);
     console.log("End Date : ", this.enddate);
 
     this.sortRecords = this.employeeSpecificRecords;
+    
     console.log("Sorted Records", this.sortRecords)
 
   }
@@ -127,7 +126,7 @@ export class RecordsComponent implements OnInit {
       showTitle: true,
       title: 'Daily Work Management records',
       useBom: true,
-      headers: ["ID", "Employee ID", "Date", "Client", "Task", "Duration", "Description"],
+      headers: ["ID", "Employee ID", "Date", "Attendance", "Client", "Task", "Duration", "Description"],
       eol: '\n'
     };
     new ngxCsv(this.employeeSpecificRecords, "dwm_report", options);

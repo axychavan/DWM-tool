@@ -40,4 +40,4 @@ app.use('/api/v1/records', recordsRoutes);
 
 app.use('/api/v1/emergencyinfo', emergencyinfoRoutes);
 
-app.listen(3000, () => console.log(`Listening on port ${process.env.PORT}...${tada}`));
+app.listen(3000, () => console.log(`Listening on port 3000...${tada}`));

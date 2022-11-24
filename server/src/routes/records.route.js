@@ -6,6 +6,9 @@ const recordRoute = require('../controllers/records.controller');
 //get all records
 router.get('/', recordRoute.getAllRecords);
 
+//post custom date
+router.post('/customdate', recordRoute.postCustomRecords);
+
 //get record by id
 router.get('/:recid', recordRoute.getRecordById);
 

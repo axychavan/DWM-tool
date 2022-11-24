@@ -19,6 +19,21 @@ exports.getAllRecords = (req, res) => {
     })
 }
 
+//post custom date
+exports.postCustomRecords = (req, res) => {
+    const input = new recordController(req.body);
+    console.log('User input', input);
+
+    recordController.postCustomRecords(input, (err, date) => {
+        console.log('We are here');
+        if (err)
+            res.send(err);
+        console.log(date);
+        //res.json({ message: 'Logged-in successfully', date })
+        res.json(date)
+    })
+}
+
 //get record by id
 exports.getRecordById = (req, res) => {
     //console.log('getting record by id');
