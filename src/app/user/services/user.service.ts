@@ -48,7 +48,7 @@ export class UserService {
   }
 
   customDate(data: any) {
-    return this.http.get<any>(this.customdate, data);
+    return this.http.post<any>(this.customdate, data);
   }
 
   addRecord(data: any) {

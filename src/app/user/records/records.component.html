@@ -31,7 +31,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Start Date</span>
                     </div>
-                    <input type="date" [(ngModel)]="startdate" name="startdate" class="form-control" aria-label="Small"
+                    <input type="date" [(ngModel)]="dateSelection.startdate" name="startdate" class="form-control" aria-label="Small"
                         aria-describedby="inputGroup-sizing-sm"
                         onfocus="this.max=new Date().toISOString().split('T')[0]" #startdateControl="ngModel" required>
                 </div>
@@ -41,7 +41,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm">End Date</span>
                     </div>
-                    <input type="date" [(ngModel)]="enddate" name="enddate" class="form-control" aria-label="Small"
+                    <input type="date" [(ngModel)]="dateSelection.enddate" name="enddate" class="form-control" aria-label="Small"
                         aria-describedby="inputGroup-sizing-sm"
                         onfocus="this.max=new Date().toISOString().split('T')[0]" #enddateControl="ngModel" required>
                 </div>
@@ -68,8 +68,8 @@
                     <th scope="col" style="width: 50px;">Functions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let item of employeeSpecificRecords; let i = index">
+            <tbody> <!-- employeeSpecificRecords -->
+                <tr *ngFor="let item of sortedRecords; let i = index">
                     <td>{{i + 1}}</td>
                     <td>{{item.date | date: 'dd-MM-yyyy'}}</td>
                     <td>{{item.attendance}}</td>
