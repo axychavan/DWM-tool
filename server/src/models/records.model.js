@@ -27,7 +27,7 @@ recordModel.getAllRecords = (result) => {
 
 //post custom date
 recordModel.postCustomRecords = (input, result) => {
-    dbConn.query('SELECT * FROM records WHERE date BETWEEN ? AND ?', [input.startdate, input.enddate], (err, res) => {
+    dbConn.query('SELECT * FROM records WHERE empid=? AND date BETWEEN ? AND ?', [input.empid, input.startdate, input.enddate], (err, res) => {
         if (err) {
             console.log('Error while fetching records');
             result(null, err);

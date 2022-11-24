@@ -85,10 +85,8 @@ export class RecordsComponent implements OnInit {
     console.log("Start Date : ", this.startdate);
     console.log("End Date : ", this.enddate);
 
-    this.sortRecords = this.employeeSpecificRecords;
+    this.sortRecords = this.employeeSpecificRecords;   
     
-    console.log("Sorted Records", this.sortRecords)
-
   }
 
   add_Record() {
