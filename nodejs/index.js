@@ -40,11 +40,11 @@ app.use('/api/v1/records', recordsRoutes);
 
 app.use('/api/v1/emergencyinfo', emergencyinfoRoutes);
 
-app.use(express.static('../nodejs/mark5')) //set the static path 
+app.use(express.static('/angular')) //set the static path 
 app.set('view engine', 'pug');
 
 app.get('/angular', (req, res) => {
-    res.sendFile('index.html', { root: __dirname })
+    res.sendFile('/angular/index.html', { root: __dirname })
 });
 
 app.listen(3000, () => {
