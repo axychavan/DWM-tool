@@ -14,10 +14,10 @@ export class RecordsComponent implements OnInit {
   user: any;
   employeeRecords: any;
   employeeSpecificRecords: any;
-  sortRecords: any;
+  sortedRecords: any;
 
-  startdate: any;
-  enddate: any;
+  startDate = formatDate(new Date(), 'yyyy-MM-01', 'en');
+  todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
 
   records: any;
   ctmap: any;
@@ -38,6 +38,10 @@ export class RecordsComponent implements OnInit {
     "empid": this.empidItem
   };
 
+  dateSelection: any = {
+    "empid": this.empidItem
+  };
+
   show: boolean = false;
   showPassword() {
     this.show = !this.show;
@@ -46,8 +50,16 @@ export class RecordsComponent implements OnInit {
   constructor(
     private userService: UserService,
     private toast: NgToastService,
-  ) { 
+  ) {
     this.month = this.currMonth;
+    console.log(this.todayDate)
+
+    this.dateSelection.startdate = this.startDate;
+    this.dateSelection.enddate = this.todayDate;
+    this.userService.customDate(this.dateSelection).subscribe((res) => {
+      this.sortedRecords = res;
+      console.log("custom date ", this.sortedRecords);
+    })
 
     this.userService.loginUser(this.loginData).subscribe((res) => {
       console.log("Login response", res);
@@ -82,14 +94,13 @@ export class RecordsComponent implements OnInit {
   }
 
   searchRecords() {
-    //console.log("Selected Month", this.month)
+    console.log("Start Date : ", this.dateSelection.startdate);    
+    console.log("End Date : ", this.dateSelection.enddate);
 
-    console.log("Start Date : ", this.startdate);
-    console.log("End Date : ", this.enddate);
-
-    this.sortRecords = this.employeeSpecificRecords;
-    console.log("Sorted Records", this.sortRecords)
-
+    this.userService.customDate(this.dateSelection).subscribe((res) => {
+      this.sortedRecords = res;
+      console.log("custom date ", this.sortedRecords);
+    })
   }
 
   add_Record() {
@@ -127,10 +138,10 @@ export class RecordsComponent implements OnInit {
       showTitle: true,
       title: 'Daily Work Management records',
       useBom: true,
-      headers: ["ID", "Employee ID", "Date", "Client", "Task", "Duration", "Description"],
+      headers: ["ID", "Employee ID", "Date", "Attendance", "Client", "Task", "Duration", "Description"],
       eol: '\n'
     };
-    new ngxCsv(this.employeeSpecificRecords, "dwm_report", options);
+    new ngxCsv(this.sortedRecords, "dwm_report", options);
   }
 
   ngOnInit(): void { }

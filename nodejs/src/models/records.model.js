@@ -8,6 +8,8 @@ var recordModel = function (item) {
     this.task = item.task;
     this.duration = item.duration;
     this.description = item.description;
+    this.startdate = item.startdate;
+    this.enddate = item.enddate;
 }
 
 //get all records
@@ -18,6 +20,19 @@ recordModel.getAllRecords = (result) => {
             result(null, err);
         } else {
             console.log('DB records fetched successfully');
+            result(null, res);
+        }
+    })
+}
+
+//post custom date
+recordModel.postCustomRecords = (input, result) => {
+    dbConn.query('SELECT * FROM records WHERE empid=? AND date BETWEEN ? AND ?', [input.empid, input.startdate, input.enddate], (err, res) => {
+        if (err) {
+            console.log('Error while fetching records');
+            result(null, err);
+        } else {
+            console.log('Records fetched');
             result(null, res);
         }
     })

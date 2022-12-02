@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 //define root route
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Node JS server is running !!!');
 });
 
 //import routes
@@ -40,4 +40,13 @@ app.use('/api/v1/records', recordsRoutes);
 
 app.use('/api/v1/emergencyinfo', emergencyinfoRoutes);
 
-app.listen(3000, () => console.log(`Listening on port ${process.env.PORT}...${tada}`));
+app.use(express.static('/angular')) //set the static path 
+app.set('view engine', 'pug');
+
+app.get('/angular', (req, res) => {
+    res.sendFile('/angular/index.html', { root: __dirname })
+});
+
+app.listen(3000, () => {
+    console.log(`Listening on port 3000...${tada}`)
+});

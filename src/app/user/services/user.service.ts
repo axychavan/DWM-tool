@@ -13,6 +13,7 @@ export class UserService {
   ctmap = "http://localhost:3000/api/v1/ctmap";
   record = "http://localhost:3000/api/v1/records";
   emergency = "http://localhost:3000/api/v1/employee/emergency";
+  customdate = "http://localhost:3000/api/v1/records/customdate";
 
   constructor(private http: HttpClient) { }
 
@@ -44,6 +45,10 @@ export class UserService {
   //records
   getRecords() {
     return this.http.get<any>(this.record);
+  }
+
+  customDate(data: any) {
+    return this.http.post<any>(this.customdate, data);
   }
 
   addRecord(data: any) {
