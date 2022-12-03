@@ -14,6 +14,7 @@ import { EmployeesComponent } from './admin/employees/employees.component';
 import { ClientsComponent } from './admin/clients/clients.component';
 import { TasksComponent } from './admin/tasks/tasks.component';
 import { CtmapComponent } from './admin/ctmap/ctmap.component';
+import { AdminRecordsComponent } from './admin/admin-records/admin-records.component';
 
 const routes: Routes = [
 
@@ -42,6 +43,7 @@ const routes: Routes = [
     component: AdminDashboardComponent,
     children: [
       { path: 'employees', component: EmployeesComponent },
+      { path: 'records', component: AdminRecordsComponent },
       { path: 'clients', component: ClientsComponent },
       { path: 'tasks', component: TasksComponent },
       { path: 'ctmap', component: CtmapComponent }
