@@ -34,6 +34,21 @@ exports.postCustomRecords = (req, res) => {
     })
 }
 
+//post month
+exports.postMonth = (req, res) => {
+    const input = new recordController(req.body);
+    console.log('User input', input);
+
+    recordController.postMonth(input, (err, month) => {
+        console.log('We are here');
+        if (err)
+            res.send(err);
+        console.log(month);
+        //res.json({ message: 'Logged-in successfully', month })
+        res.json(month)
+    })
+}
+
 //get record by id
 exports.getRecordById = (req, res) => {
     //console.log('getting record by id');

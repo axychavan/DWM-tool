@@ -10,6 +10,7 @@ var recordModel = function (item) {
     this.description = item.description;
     this.startdate = item.startdate;
     this.enddate = item.enddate;
+    this.month = item.month;
 }
 
 //get all records
@@ -28,6 +29,19 @@ recordModel.getAllRecords = (result) => {
 //post custom date
 recordModel.postCustomRecords = (input, result) => {
     dbConn.query('SELECT * FROM records WHERE empid=? AND date BETWEEN ? AND ?', [input.empid, input.startdate, input.enddate], (err, res) => {
+        if (err) {
+            console.log('Error while fetching records');
+            result(null, err);
+        } else {
+            console.log('Records fetched');
+            result(null, res);
+        }
+    })
+}
+
+//post month
+recordModel.postMonth = (input, result) => {
+    dbConn.query('SELECT * FROM records WHERE empid=? AND MONTH(date) =? ', [input.empid, input.month], (err, res) => {
         if (err) {
             console.log('Error while fetching records');
             result(null, err);

@@ -24,8 +24,8 @@ export class ProfileComponent implements OnInit {
     private toast: NgToastService
   ) {
     this.userService.loginUser(this.loginData).subscribe((res) => {
-      this.user = res;
-      console.log("Login response", this.user);
+      this.user = res.profile;
+      console.log("profile", this.user);
     })
   }
 
@@ -42,7 +42,5 @@ export class ProfileComponent implements OnInit {
     this.toast.success({ detail: "Success", summary: "User Profile updated.", duration: 4000 });
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }

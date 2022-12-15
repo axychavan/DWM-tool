@@ -33,20 +33,18 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(this.loginData).subscribe((res) => {
       console.log("Login response", res);
 
-      let empidkey = res.map((item) => item.empid);
+      let empidkey = res.profile[0].empid;
       localStorage.setItem("empid", empidkey);
 
-      let passwordkey = res.map((item) => item.password);
+      let passwordkey = res.profile[0].password;
       localStorage.setItem("password", passwordkey);
 
-      let rolekey = res.map((item) => item.role);
+      let rolekey = res.profile[0].role;
       localStorage.setItem("role", rolekey);
 
       this.empidItem = localStorage.getItem('empid');
       this.passwordItem = localStorage.getItem('password');
       this.roleItem = localStorage.getItem('role');
-
-      //console.log("role", this.roleItem);
 
       if (this.roleItem == "employee") {
         this.router.navigate(['dashboard']);

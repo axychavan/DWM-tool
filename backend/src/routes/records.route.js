@@ -9,6 +9,9 @@ router.get('/', recordRoute.getAllRecords);
 //post custom date
 router.post('/customdate', recordRoute.postCustomRecords);
 
+//post month
+router.post('/month', recordRoute.postMonth);
+
 //get record by id
 router.get('/:recid', recordRoute.getRecordById);
 

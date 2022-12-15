@@ -10,8 +10,8 @@ exports.postLogin = (req, res) => {
         if (err)
             res.send(err);
         console.log(profile);
-        //res.json({ message: 'Logged-in successfully', profile })
-        res.json(profile)
+        res.json({ message: 'Logged-in successfully', profile })
+        //res.json(profile)
     })
 }
 

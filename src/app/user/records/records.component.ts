@@ -11,6 +11,8 @@ import { formatDate } from '@angular/common';
 })
 export class RecordsComponent implements OnInit {
 
+  variab = 10;
+
   user: any;
   employeeRecords: any;
   employeeSpecificRecords: any;
@@ -24,7 +26,6 @@ export class RecordsComponent implements OnInit {
   clients: any;
   tasks: any;
   task_list: any = [];
-  month: any;
   currMonth = formatDate(new Date(), 'yyyy-MM', 'en');
 
   empidItem = localStorage.getItem('empid');
@@ -35,6 +36,10 @@ export class RecordsComponent implements OnInit {
   }
 
   addRecord: any = {
+    "empid": this.empidItem
+  };
+
+  monthSelection: any = {
     "empid": this.empidItem
   };
 
@@ -51,9 +56,6 @@ export class RecordsComponent implements OnInit {
     private userService: UserService,
     private toast: NgToastService,
   ) {
-    this.month = this.currMonth;
-    console.log(this.todayDate)
-
     this.dateSelection.startdate = this.startDate;
     this.dateSelection.enddate = this.todayDate;
     this.userService.customDate(this.dateSelection).subscribe((res) => {
@@ -93,8 +95,17 @@ export class RecordsComponent implements OnInit {
     })
   }
 
+  monthChange() {
+    console.log("current month", this.currMonth);
+    this.monthSelection.month = this.currMonth.split('-').pop();
+    this.userService.customMonth(this.monthSelection).subscribe((res) => {
+      this.sortedRecords = res;
+      console.log("custom month", this.sortedRecords);
+    })
+  }
+
   searchRecords() {
-    console.log("Start Date : ", this.dateSelection.startdate);    
+    console.log("Start Date : ", this.dateSelection.startdate);
     console.log("End Date : ", this.dateSelection.enddate);
 
     this.userService.customDate(this.dateSelection).subscribe((res) => {
@@ -108,7 +119,7 @@ export class RecordsComponent implements OnInit {
 
     this.userService.addRecord(this.addRecord).subscribe(res => {
       console.log("Record added", res);
-      window.location.reload();
+      //window.location.reload();
     })
     this.toast.success({ detail: "Success", summary: 'Record added successfully', duration: '3000' });
   }
