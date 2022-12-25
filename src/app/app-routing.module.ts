@@ -15,12 +15,14 @@ import { ClientsComponent } from './admin/clients/clients.component';
 import { TasksComponent } from './admin/tasks/tasks.component';
 import { CtmapComponent } from './admin/ctmap/ctmap.component';
 import { AdminRecordsComponent } from './admin/admin-records/admin-records.component';
+import { UnderReviewComponent } from './auth/under-review/under-review.component';
 
 const routes: Routes = [
 
   // Auth Module
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'under-review', component: UnderReviewComponent },
   { path: 'signup', component: SignupComponent },
 
   // User Module

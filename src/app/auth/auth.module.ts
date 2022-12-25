@@ -6,12 +6,14 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FooterComponent } from './footer/footer.component';
+import { UnderReviewComponent } from './under-review/under-review.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     SignupComponent,
-    FooterComponent
+    FooterComponent,
+    UnderReviewComponent
   ],
   imports: [
     CommonModule,

@@ -1,1 +1,111 @@
-<p>signup works!</p>
+<!-- Main Content -->
+<div class="row m-3">
+    <div class="col-3">
+        <div class="card mt-2">
+            <div class="card-body">
+                <h2 class="card-title mb-4 text-center">Sign-up</h2>
+                <hr>
+                <form>
+                    <div class="form-floating mb-3" [class.has-error]="empidControl.invalid && empidControl.touched">
+                        <input [(ngModel)]="signupInput.empid" #empid type="text" name="empid" class="form-control"
+                            id="empid" placeholder="30190002" #empidControl="ngModel" required>
+                        <label for="empid">Name</label>
+                        <small class="text-danger" *ngIf="empidControl.invalid && empidControl.touched">
+                            Please enter your employee ID.
+                        </small>
+                    </div>
+
+                    <div class="form-floating mb-3" [class.has-error]="empidControl.invalid && empidControl.touched">
+                        <input [(ngModel)]="signupInput.empid" #empid type="text" name="empid" class="form-control"
+                            id="empid" placeholder="30190002" #empidControl="ngModel" required>
+                        <label for="empid">Email address</label>
+                        <small class="text-danger" *ngIf="empidControl.invalid && empidControl.touched">
+                            Please enter your employee ID.
+                        </small>
+                    </div>
+
+                    <div class="form-floating mb-3" [class.has-error]="empidControl.invalid && empidControl.touched">
+                        <input [(ngModel)]="signupInput.empid" #empid type="text" name="empid" class="form-control"
+                            id="empid" placeholder="30190002" #empidControl="ngModel" required>
+                        <label for="empid">Phone number</label>
+                        <small class="text-danger" *ngIf="empidControl.invalid && empidControl.touched">
+                            Please enter your employee ID.
+                        </small>
+                    </div>
+
+                    <div class="form-floating mb-3"
+                        [class.has-error]="passwordControl.invalid && passwordControl.touched">
+                        <input [(ngModel)]="signupInput.password" #password type="password" name="password"
+                            class="form-control" id="password" placeholder="Password"
+                            [type]="show ? 'text' : 'password'" #passwordControl="ngModel" required>
+                        <label for="password">New Password</label>
+                        <small class="text-danger" *ngIf="passwordControl.invalid && passwordControl.touched">
+                            Please enter a password.
+                        </small>
+                    </div>
+
+                    <div class="form-floating mb-1"
+                        [class.has-error]="passwordControl.invalid && passwordControl.touched">
+                        <input [(ngModel)]="signupInput.password" #password type="password" name="password"
+                            class="form-control" id="password" placeholder="Password"
+                            [type]="show ? 'text' : 'password'" #passwordControl="ngModel" required>
+                        <label for="password">Confirm Password</label>
+                        <small class="text-danger" *ngIf="passwordControl.invalid && passwordControl.touched">
+                            Please enter a password.
+                        </small>
+                    </div>
+
+                    <div class="form-check" style="float: right;">
+                        <input class="form-check-input" style="height: 15px; width:15px; cursor: pointer;"
+                            type="checkbox" id="showpassword" (click)="showPassword()">
+                        <label class="form-check-label" for="showpassword"
+                            style="user-select: none; font-size: 14px; cursor: pointer;">show</label>
+                    </div>
+
+                    <button class="btn btn-primary mt-5 mb-1 btn-sm" type="submit" style="width: 100%;"
+                        (click)='signup()'
+                        [disabled]="!empidControl.valid || !passwordControl.valid">Signup</button><br>
+                    <div class="text-center">
+                        <small>Already registered ?<a routerLink="/login" style="text-decoration: none;">
+                                Login</a></small>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="card mt-2 mb-2">
+            <div class="card-body">
+                <h3><a style="color: #E55451; text-decoration: underline;"
+                        href="https://www.le-transformation.com/">L.E.
+                        Transformation</a></h3>
+                <h6>Delivering credible solutions for incredible bussinesses.</h6>
+                <hr>
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="..." alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="..." alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="..." alt="Third slide">
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-4">Improving the customer experience by helping you work smarter, not harder. We know the
+                    key to
+                    developing
+                    successful partnerships and relationships is not just meeting, but exceeding our client's
+                    needs.<br><br>
+                    Serving various clients accross different countries.</p>
+                <hr>
+                <p>This is a Daily Work Management tool developed and powered by L.E. Transformation.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<app-footer></app-footer>
