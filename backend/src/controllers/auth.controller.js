@@ -3,6 +3,8 @@ var nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 dotenv.config({ path: 'backend/.env' });
 
+const jwt = require('jsonwebtoken')
+
 // get all employees
 exports.getAllEmployees = (req, res) => {
     model.getAllEmployees((err, records) => {
@@ -14,14 +16,13 @@ exports.getAllEmployees = (req, res) => {
     })
 }
 
-// notify new signup
+// signup
 exports.postSignup = (req, res) => {
     const input = new model(req.body);
     console.log('input : ', input);
 
     model.postSignup(input, (err, records) => {
         console.log('We are here');
-        console.log("Test", records)
 
         if (err) {
             res.send(err);
@@ -59,7 +60,7 @@ exports.postSignup = (req, res) => {
                 }
             });
         } else {
-            res.json({ message: 'Account already exists' })
+            res.json({ message: 'Account is under-review' })
         }
     })
 }
@@ -77,7 +78,48 @@ exports.postLogin = (req, res) => {
         } else if (Object.keys(records).length == 0) {
             res.json({ message: 'Login Unsuccessful' })
         } else {
-            res.json({ message: 'Login Successful' })
+            var role = records.map(r => r.role)
+            var role = role.toString();
+
+            var status = records.map(r => r.status)
+            var status = status.toString();
+
+            const empid = req.body.empid
+            const user = { name: empid }
+
+            const jwtToken = jwt.sign(user, process.env.JWT_TOKEN, { expiresIn: "1hr" })
+            console.log("TOKEN", jwtToken)
+
+            res.json({ message: 'Login Successful', jwt: jwtToken, role: role, reviewed: reviewed, status: status })
+        }
+    })
+}
+
+// To verify token
+/* function verifyToken(req, res, next) {
+    const authHeader = req.headers['x-authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (token == null) return res.sendStatus(401)
+
+    jwt.verify(token, process.env.JWT_TOKEN, (err, user) => {
+        if (err) return sendStatus(403)
+        req.user = user
+
+        next()
+    })
+} */
+
+// profile
+exports.getProfile = (req, res) => {
+    const input = new model(req.body);
+    console.log('input : ', input);
+
+    model.getProfile(input, (err, user) => {
+        console.log('We are here');
+        if (err)
+            res.send(err);
+        else {
+            res.json({ message: 'Login Successful', profile: user })
         }
     })
 }
@@ -94,15 +136,13 @@ exports.forgotPassword = (req, res) => {
             res.send(err);
         } else if (Object.keys(records).length == 0) {
             res.json({ message: 'Invalid credentials' })
+        } else if (records.map(r => r.status).toString() == 'inactive') {
+            res.json({ message: 'Account is inactive' })
         } else {
             res.json({ message: 'Valid credentials. Email sent' })
 
-            var empid = records.map(r => r.empid)
-            var empid = empid.toString();
-
-            var password = records.map(r => r.password)
-            var password = password.toString();
-            console.log("password", password)
+            var empid = records.map(r => r.empid).toString();
+            var password = records.map(r => r.password).toString();
 
             var transporter = nodemailer.createTransport({
                 service: 'gmail',

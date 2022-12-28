@@ -1,27 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-const recordRoute = require('../controllers/records.controller');
+const controller = require('../controllers/records.controller');
 
 //get all records
-router.get('/', recordRoute.getAllRecords);
-
-//post custom date
-router.post('/customdate', recordRoute.postCustomRecords);
-
-//post month
-router.post('/month', recordRoute.postMonth);
-
-//get record by id
-router.get('/:recid', recordRoute.getRecordById);
+router.get('/', controller.getAllRecords);
 
 //create new record
-router.post('/', recordRoute.postNewRecord);
+router.post('/', controller.postRecord);
 
-//update record by id
-router.put('/:id', recordRoute.putRecordById);
+//patch record by id
+router.patch('/:id', controller.putRecord);
 
 //delete record by id
-router.delete('/:id', recordRoute.deleteRecord);
+router.delete('/:id', controller.deleteRecord);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 var dbConn = require('../config/db.config');
 
-var employeeModel = function (item) {
+var Items = function (item) {
     this.empid = item.empid;
     this.name = item.name;
     this.email = item.email;
@@ -8,25 +8,14 @@ var employeeModel = function (item) {
     this.designation = item.designation;
     this.doj = item.doj;
     this.password = item.password;
+    this.question = item.question;
+    this.answer = item.answer;
     this.role = item.role;
-    this.emergency = item.emergency;
-}
-
-//login a user 
-employeeModel.postLogin = (input, result) => {
-    dbConn.query('SELECT * FROM employee WHERE empid=? AND password=?', [input.empid, input.password], (err, res) => {
-        if (err) {
-            console.log('Error while fetching records');
-            result(null, err);
-        } else {
-            console.log('Login successful');
-            result(null, res);
-        }
-    })
+    this.status = item.status;
 }
 
 //get all employees
-employeeModel.getAllEmployees = (result) => {
+Items.getAllEmployees = (result) => {
     dbConn.query('SELECT * FROM employee', (err, res) => {
         if (err) {
             console.log('Error while fetching DB records');
@@ -38,7 +27,26 @@ employeeModel.getAllEmployees = (result) => {
     })
 }
 
-//get all emergency contacts
+//create new employee (for ADMIN)
+Items.postEmployee = (input, result) => {
+    dbConn.query("SELECT * FROM employee WHERE email=? OR phone=?", [input.email, input.phone], (err, res) => {
+        if (err) {
+            console.log('Error while fetching DB records');
+            result(null, err);
+        } else if (Object.keys(res).length == 0) {
+            console.log('DB records fetched successfully');
+            if (input.role == 'employee')
+                input.status = 'new'
+            dbConn.query('INSERT INTO employee SET ?', input)
+            result(null, res);
+        } else if (Object.keys(res).length != 0) {
+            console.log('DB records fetched successfully');
+            result(null, res);
+        }
+    })
+}
+
+/* //get all emergency contacts
 employeeModel.getEmergency = (result) => {
     dbConn.query('SELECT * FROM employee WHERE emergency = "yes"', (err, res) => {
         if (err) {
@@ -102,6 +110,6 @@ employeeModel.deleteEmployee = (empid, result) => {
             result(null, res);
         }
     })
-}
+} */
 
-module.exports = employeeModel;
+module.exports = Items;

@@ -1,12 +1,12 @@
-const recordController = require('../models/records.model');
+const model = require('../models/records.model');
 
 //get all records
 exports.getAllRecords = (req, res) => {
-    recordController.getAllRecords((err, records) => {
+    model.getAllRecords((err, records) => {
         console.log('We are here');
         if (err)
             res.send(err);
-        
+
         // sorting date in ascending order
         records.sort(function (a, b) {
             var c = new Date(a.date);
@@ -19,76 +19,37 @@ exports.getAllRecords = (req, res) => {
     })
 }
 
-//post custom date
-exports.postCustomRecords = (req, res) => {
-    const input = new recordController(req.body);
-    console.log('User input', input);
-
-    recordController.postCustomRecords(input, (err, date) => {
-        console.log('We are here');
-        if (err)
-            res.send(err);
-        console.log(date);
-        //res.json({ message: 'Logged-in successfully', date })
-        res.json(date)
-    })
-}
-
-//post month
-exports.postMonth = (req, res) => {
-    const input = new recordController(req.body);
-    console.log('User input', input);
-
-    recordController.postMonth(input, (err, month) => {
-        console.log('We are here');
-        if (err)
-            res.send(err);
-        console.log(month);
-        //res.json({ message: 'Logged-in successfully', month })
-        res.json(month)
-    })
-}
-
-//get record by id
-exports.getRecordById = (req, res) => {
-    //console.log('getting record by id');
-    recordController.getRecordById(req.params.recid, (err, record) => {
-        if (err)
-            res.send(err);
-        console.log('Single record', record);
-        res.send(record);
-    })
-}
-
 //create new record
-exports.postNewRecord = (req, res) => {
-    const user_input = new recordController(req.body);
-    console.log('user_input : ', user_input);
+exports.postRecord = (req, res) => {
+    const input = new model(req.body);
+    console.log('input : ', input);
 
-    recordController.postNewRecord(user_input, (err, records) => {
+    model.postRecord(input, (err, records) => {
+        console.log('We are here');
         if (err)
             res.send(err);
-        res.json({ recordid: records.insertId, message: 'Record created successfully' })
+        else
+            res.json({ recid: records.insertId, message: 'Record created successfully' })
     })
 }
 
-//update record by id
-exports.putRecordById = (req, res) => {
-    const user_input = new recordController(req.body);
-    console.log('user_input : ', user_input);
+//patch record by id
+exports.putRecord = (req, res) => {
+    const input = new model(req.body);
+    console.log('input : ', input);
 
-    recordController.putRecordById(req.params.id, user_input, (err, records) => {
+    model.putRecord(req.params.id, input, (err, records) => {
         if (err)
             res.send(err);
-        res.json({ message: 'Record updated successfully' })
+        res.json({ message: records.changedRows + ' ' + 'Record(s) updated' })
     })
 }
 
 //delete record by id
 exports.deleteRecord = (req, res) => {
-    recordController.deleteRecord(req.params.id, (err, records) => {
+    model.deleteRecord(req.params.id, (err, records) => {
         if (err)
             res.send(err);
-        res.json({ message: 'Record deleted successfully' });
+        res.json({ message: records.affectedRows + ' ' + 'Record(s) deleted' });
     })
 }

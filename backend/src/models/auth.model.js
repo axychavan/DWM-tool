@@ -11,7 +11,6 @@ var Items = function (item) {
     this.question = item.question;
     this.answer = item.answer;
     this.role = item.role;
-    this.reviewed = item.reviewed;
     this.status = item.status;
 }
 
@@ -28,17 +27,18 @@ Items.getAllEmployees = (result) => {
     })
 }
 
-// notify new signup
+// signup
 Items.postSignup = (input, result) => {
-    dbConn.query("SELECT * FROM employee WHERE email=? AND phone=?", [input.email, input.phone], (err, res) => {
+    dbConn.query("SELECT * FROM employee WHERE email=? OR phone=?", [input.email, input.phone], (err, res) => {
         if (err) {
             console.log('Error while fetching DB records');
             result(null, err);
         } else if (Object.keys(res).length == 0) {
             console.log('DB records fetched successfully');
+
+            input.status = 'under-review'
             dbConn.query('INSERT INTO employee SET ?', input)
             result(null, res);
-            console.log("test", res)
         } else if (Object.keys(res).length != 0) {
             console.log('DB records fetched successfully');
             result(null, res);
@@ -49,6 +49,19 @@ Items.postSignup = (input, result) => {
 // login
 Items.postLogin = (input, result) => {
     dbConn.query("SELECT * FROM employee WHERE empid=? AND password=?", [input.empid, input.password], (err, res) => {
+        if (err) {
+            console.log('Error while fetching DB records');
+            result(null, err);
+        } else {
+            console.log('DB records fetched successfully');
+            result(null, res);
+        }
+    })
+}
+
+// profile
+Items.getProfile = (input, result) => {
+    dbConn.query("SELECT * FROM employee WHERE empid=?", [input.empid], (err, res) => {
         if (err) {
             console.log('Error while fetching DB records');
             result(null, err);

@@ -7,7 +7,7 @@
                 <hr>
                 <form>
                     <div class="form-floating mb-3" [class.has-error]="empidControl.invalid && empidControl.touched">
-                        <input [(ngModel)]="loginData.empid" #empid type="text" name="empid" class="form-control"
+                        <input [(ngModel)]="loginInput.empid" #empid type="text" name="empid" class="form-control"
                             id="empid" placeholder="30190002" #empidControl="ngModel" required>
                         <label for="empid">Employee Id</label>
                         <small class="text-danger" *ngIf="empidControl.invalid && empidControl.touched">
@@ -17,7 +17,7 @@
 
                     <div class="form-floating mb-1"
                         [class.has-error]="passwordControl.invalid && passwordControl.touched">
-                        <input [(ngModel)]="loginData.password" #password type="password" name="password"
+                        <input [(ngModel)]="loginInput.password" #password type="password" name="password"
                             class="form-control" id="password" placeholder="Password"
                             [type]="show ? 'text' : 'password'" #passwordControl="ngModel" required>
                         <label for="password">Password</label>
@@ -28,7 +28,7 @@
 
                     <small><span class="text-primary" data-toggle="modal" data-target="#forgot-password"
                             style="cursor: pointer;">
-                            forgot password ?</span></small>
+                            Forgot Password ?</span></small>
                     <div class="form-check" style="float: right;">
                         <input class="form-check-input" style="height: 15px; width:15px; cursor: pointer;"
                             type="checkbox" id="showpassword" (click)="showPassword()">
@@ -49,32 +49,28 @@
     <div class="col-9">
         <div class="card mt-2 mb-2">
             <div class="card-body">
-                <h3><a style="color: #E55451; text-decoration: underline;"
-                        href="https://www.le-transformation.com/">L.E.
-                        Transformation</a></h3>
+                <h3><a style="color: #E55451; text-decoration: underline;" href="">Daily Work Management</a></h3>
                 <h6>Delivering credible solutions for incredible bussinesses.</h6>
                 <hr>
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="..." alt="First slide">
+                            <img class="d-block w-100" src="" alt="First slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="..." alt="Second slide">
+                            <img class="d-block w-100" src="" alt="Second slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="..." alt="Third slide">
+                            <img class="d-block w-100" src="" alt="Third slide">
                         </div>
                     </div>
                 </div>
-                <p class="mt-4">Improving the customer experience by helping you work smarter, not harder. We know the
-                    key to
-                    developing
-                    successful partnerships and relationships is not just meeting, but exceeding our client's
-                    needs.<br><br>
-                    Serving various clients accross different countries.</p>
+                <p class="mt-4">A Daily Work Management is a system that provides the ability to manage employee/admin's
+                    everyday operations.
+                </p>
                 <hr>
-                <p>This is a Daily Work Management tool developed and powered by L.E. Transformation.</p>
+                <p>This is a Daily Work Management tool developed and powered to eliminate lean waste and create value.
+                </p>
             </div>
         </div>
     </div>
@@ -93,40 +89,61 @@
             </div>
             <div class="modal-body">
 
-                <div class="form-floating mb-3" [class.has-error]="empidControl.invalid && empidControl.touched">
-                    <input [(ngModel)]="loginData.empid" #empid type="text" name="empid" class="form-control" id="empid"
-                        placeholder="30190002" #empidControl="ngModel" required>
-                    <label for="empid">Employee Id</label>
-                    <small class="text-danger" *ngIf="empidControl.invalid && empidControl.touched">
-                        Please enter your employee ID.
+                <div class="form-floating mb-3" [class.has-error]="emailControl.invalid && emailControl.touched">
+                    <input [(ngModel)]="forgotPasswordInput.email" #empid type="email" name="email" class="form-control"
+                        id="email" placeholder="30190002" #emailControl="ngModel" required>
+                    <label for="email">Email Address</label>
+                    <small class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">
+                        Please provide an email address.
                     </small>
                 </div>
 
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                        <option selected>Select ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <label for="floatingSelect">Select a Security Question</label>
+                <div class="form-floating mb-3" [class.has-error]="answerControl.invalid && answerControl.touched">
+                    <input [(ngModel)]="forgotPasswordInput.phone" #empid type="text" name="phone" class="form-control"
+                        id="phone" placeholder="30190002" #phoneControl="ngModel" required>
+                    <label for="phone">Phone number</label>
+                    <small class="text-danger" *ngIf="phoneControl.invalid && phoneControl.touched">
+                        Please provide a phone number.
+                    </small>
                 </div>
 
-                <div class="form-floating mb-3" [class.has-error]="empidControl.invalid && empidControl.touched">
-                    <input [(ngModel)]="loginData.empid" #empid type="text" name="empid" class="form-control" id="empid"
-                        placeholder="30190002" #empidControl="ngModel" required>
-                    <label for="empid">Security Question's Answer</label>
-                    <small class="text-danger" *ngIf="empidControl.invalid && empidControl.touched">
-                        Please enter your employee ID.
+                <div class="form-floating mb-3" [class.has-error]="questionControl.invalid && questionControl.touched">
+                    <select [(ngModel)]="forgotPasswordInput.question" #question #questionControl="ngModel"
+                        class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected disabled>Select ...</option>
+                        <option value="In what city were you born ?">In what city were you born ?</option>
+                        <option value="What is your mother's maiden name ?">What is your mother's maiden name ?</option>
+                        <option value="What is your all time favourite song ?">What is your all time favourite song ?
+                        </option>
+                        <option value="What high school did you attend ?">What high school did you attend ?</option>
+                        <option value="What is your first special friend's name ?">What is your first special friend's
+                            name ?</option>
+                        <option value="Which is your favourite film ?">Which is your favourite film ?</option>
+                    </select>
+                    <label for="floatingSelect">Select a Security Question</label>
+                    <small class="text-danger" *ngIf="questionControl.invalid || questionControl.touched">
+                        Please select a security question.
+                    </small>
+                </div>
+
+                <div class="form-floating mb-3" [class.has-error]="answerControl.invalid && answerControl.touched">
+                    <input [(ngModel)]="forgotPasswordInput.answer" #empid type="text" name="answer" class="form-control"
+                        id="answer" placeholder="30190002" #answerControl="ngModel" required>
+                    <label for="answer">Security Question's Answer</label>
+                    <small class="text-danger" *ngIf="answerControl.invalid && answerControl.touched">
+                        Please provide an answer.
                     </small>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-outline-primary btn-sm w-100" type="submit">Confirm</button>
+                        <button class="btn btn-outline-primary btn-sm w-100" type="submit"
+                            [disabled]="!emailControl.valid || !phoneControl.valid ||!questionControl.valid || !answerControl.valid"
+                            (click)="forgotPassword()">Confirm</button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-outline-danger btn-sm w-100" type="submit" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-outline-danger btn-sm w-100" type="submit"
+                            data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>

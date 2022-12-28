@@ -9,19 +9,19 @@ import { UserService } from '../services/user.service';
 })
 export class UserNavbarComponent implements OnInit {
 
-  user: any;
-  empidItem = localStorage.getItem('empid');
-  passwordItem = localStorage.getItem('password');
-  loginData: any = {
-    "empid": this.empidItem,
-    "password": this.passwordItem
-  }
+  greeting: any;
 
   constructor(private router: Router, private userService: UserService) {
-    this.userService.loginUser(this.loginData).subscribe((res) => {
-      this.user = res.profile[0].name;
-      console.log("Test", this.user)
-    })
+
+    var curHr = new Date().getHours()
+    if (curHr < 12) {
+      this.greeting = 'Good Morning'
+    } else if (curHr < 18) {
+      this.greeting = 'Good Afternoon'
+    } else {
+      this.greeting = 'Good Evening'
+    }
+    
   }
 
   logout() {

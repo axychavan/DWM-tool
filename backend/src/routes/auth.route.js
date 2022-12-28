@@ -12,6 +12,9 @@ router.post('/signup', controller.postSignup);
 // login
 router.post('/login', controller.postLogin);
 
+// profile
+router.get('/profile', controller.getProfile);
+
 // forgot password
 router.post('/forgot-password', controller.forgotPassword);
 

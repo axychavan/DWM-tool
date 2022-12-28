@@ -1,129 +1,88 @@
-<!-- Profile Card -->
-<div class="card ml-3 mr-3">
+<div class="card mt-3 m-auto" style="width: 800px;">
     <div class="card-body">
         <h3>
-            Employee Profile
-            <button type="button" class="btn btn-sm btn-outline-primary" style="float: right;" data-toggle="modal"
-                data-target="#updateProfile">
-                <i class="bi bi-pencil-square"></i> Edit
-            </button>
+            <i class="bi bi-person-circle"></i>
+            Update Profile
         </h3>
+        <h6 class="card-subtitle mb-2 text-muted">Please update your profile to navigate to your designated dashboard.
+        </h6>
         <hr>
 
-        <div class="row">
-            <div class="col-sm-4 text-center">
-                <img src="assets/profile.jpg" alt="Profile Photo" width="150px" height="150px">
-                <h6>Employee ID : <span *ngFor="let item of user">{{item.empid}}</span> </h6>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput" disabled>Employee ID</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Name</label>
+        </div>
+
+        <div class="row g-2">
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                </div>
             </div>
-            <div class="col-sm-8 p-3">
-                <h6>Name : <span *ngFor="let item of user">{{item.name}}</span> </h6>
-                <h6>Email : <span *ngFor="let item of user">{{item.email}}</span> </h6>
-                <h6>Phone : <span *ngFor="let item of user">{{item.phone}}</span> </h6>
-                <h6>Designation : <span *ngFor="let item of user">{{item.designation}}</span> </h6>
-                <h6>Date of Joining : <span *ngFor="let item of user">{{item.doj | date: 'dd MMMM yyyy'}}</span> </h6>
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Phone</label>
+                </div>
             </div>
         </div>
+
+        <div class="row g-2">
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Designation</label>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Date of Joining</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-2">
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Password</label>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Confirm Password</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" data-toggle="modal" data-target="#updateProfile" class="btn btn-sm btn-outline-primary">Go
+            to Dashboard <i class="bi bi-arrow-right-short"></i></button>
+
     </div>
 </div>
 
 <!-- Update Profile Modal -->
-<div class="modal fade" id="updateProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="updateProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"><i class="bi bi-person-circle"></i> Edit Profile</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <div class="modal-body">
-
-                <!-- <div class="text-center">
-                    <img src="assets/profile.jpg" alt="Profile Photo" width="100px" height="100px"><br>
-                    <input type="file" id="actual-btn" hidden />
-                    <label for="actual-btn" class="btn btn-sm btn-outline-primary" style="cursor: pointer;"><i
-                            class="bi bi-person-bounding-box"></i>Change</label>
-                </div> -->
-
-                <div class="form-group" [class.has-error]="nameControl.invalid && nameControl.touched">
-                    <label for="name">Name</label>
-                    <input [(ngModel)]="putUser.name" type="text" class="form-control" id="name" placeholder="Full Name"
-                        #nameControl="ngModel" required>
-                    <small class="text-danger" *ngIf="nameControl.invalid && nameControl.touched">
-                        Please enter your Full name.
-                    </small>
+                <div>
+                    Please make sure the information is true and correct, you won't be able to change it later.
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6" [class.has-error]="emailControl.invalid && emailControl.touched">
-                        <label for="email">Email</label>
-                        <input [(ngModel)]="putUser.email" type="email" class="form-control" id="email"
-                            placeholder="Email" #emailControl="ngModel" required>
-                        <small class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">
-                            Please enter your Email.
-                        </small>
-                    </div>
-                    <div class="form-group col-md-6" [class.has-error]="phoneControl.invalid && phoneControl.touched">
-                        <label for="phone">Phone</label>
-                        <input [(ngModel)]="putUser.phone" type="text" class="form-control" id="phone"
-                            placeholder="Phone" #phoneControl="ngModel" required>
-                        <small class="text-danger" *ngIf="phoneControl.invalid && phoneControl.touched">
-                            Please enter your Phone number.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6"
-                        [class.has-error]="designationControl.invalid && designationControl.touched">
-                        <label for="designation">Designation</label>
-                        <input [(ngModel)]="putUser.designation" type="text" class="form-control" id="designation"
-                            placeholder="Designation" #designationControl="ngModel" required>
-                        <small class="text-danger" *ngIf="designationControl.invalid && designationControl.touched">
-                            Please enter your Designation.
-                        </small>
-                    </div>
-                    <!-- <div class="form-group col-md-6" [class.has-error]="dojControl.invalid && dojControl.touched">
-                        <label for="doj">Date of Joining</label>
-                        <input [(ngModel)]="putUser.doj" type="date" class="form-control" id="doj" #dojControl="ngModel"
-                            required>
-                        <small class="text-danger" *ngIf="dojControl.invalid && dojControl.touched">
-                            Please select your joining date.
-                        </small>
-                    </div> -->
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6"
-                        [class.has-error]="passwordControl.invalid && passwordControl.touched">
-                        <label for="password">Current Password</label>
-                        <input [(ngModel)]="putUser.password" type="text" class="form-control" id="password"
-                            placeholder="Password" #passwordControl="ngModel" required>
-                        <small class="text-danger" *ngIf="passwordControl.invalid && passwordControl.touched">
-                            Please enter your password.
-                        </small>
-                    </div>
-                </div>
-                <hr>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="designation">New Password</label>
-                        <input type="password" class="form-control" id="newPassword" placeholder="Designation">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword">
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-sm btn-outline-success" data-dismiss="modal"
-                        (click)="updateUser()"
-                        [disabled]="!nameControl.valid || !emailControl.valid || !phoneControl.valid || !designationControl.valid || !passwordControl.valid"><i
-                            class="bi bi-clipboard-check"></i>
-                        Update</button>
+                <div style="float: right;">
+                    <button type="button" class="btn btn-sm btn-outline-primary mr-2"
+                        data-dismiss="modal">Go
+                        to Dashboard <i class="bi bi-arrow-right-short"></i></button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

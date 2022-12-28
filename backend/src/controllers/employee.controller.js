@@ -1,23 +1,8 @@
-const employeeController = require('../models/employee.model');
-
-//login a user
-exports.postLogin = (req, res) => {
-    const input = new employeeController(req.body);
-    console.log('User input', input);
-
-    employeeController.postLogin(input, (err, profile) => {
-        console.log('We are here');
-        if (err)
-            res.send(err);
-        console.log(profile);
-        res.json({ message: 'Logged-in successfully', profile })
-        //res.json(profile)
-    })
-}
+const model = require('../models/employee.model');
 
 //get all employees
 exports.getAllEmployees = (req, res) => {
-    employeeController.getAllEmployees((err, records) => {
+    model.getAllEmployees((err, records) => {
         console.log('We are here');
         if (err)
             res.send(err);
@@ -26,6 +11,23 @@ exports.getAllEmployees = (req, res) => {
     })
 }
 
+//create new employee (for ADMIN)
+exports.postEmployee = (req, res) => {
+    const input = new model(req.body);
+    console.log('input : ', input);
+
+    model.postEmployee(input, (err, records) => {
+        if (err) {
+            res.send(err);
+        } else if (Object.keys(records).length == 0) {
+            res.json({ message: 'Account is created' })
+        } else {
+            res.json({ message: 'Account exists' })
+        }
+    })
+}
+
+/* 
 //get all emergency contacts
 exports.getEmergency = (req, res) => {
     employeeController.getEmergency((err, records) => {
@@ -79,4 +81,4 @@ exports.deleteEmployee = (req, res) => {
             res.send(err);
         res.json({ message: 'Employee deleted successfully' });
     })
-}
+} */

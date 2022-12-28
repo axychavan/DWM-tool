@@ -5,19 +5,17 @@ import { FormsModule } from '@angular/forms';
 
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { UserNavbarComponent } from './user-navbar/user-navbar.component';
-import { ProfileComponent } from './profile/profile.component';
 import { RecordsComponent } from './records/records.component';
-import { EmergencyContactComponent } from './emergency-contact/emergency-contact.component';
 import { FooterComponent } from './footer/footer.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     UserDashboardComponent,
     UserNavbarComponent,
-    ProfileComponent,
     RecordsComponent,
-    EmergencyContactComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -27,9 +25,7 @@ import { FooterComponent } from './footer/footer.component';
   exports: [
     UserDashboardComponent,
     UserNavbarComponent,
-    ProfileComponent,
     RecordsComponent,
-    EmergencyContactComponent,
     FooterComponent
   ]
 })

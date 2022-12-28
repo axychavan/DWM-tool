@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const employeeRoute = require('../controllers/employee.controller');
-
-//login a user
-router.post('/login', employeeRoute.postLogin);
+const controller = require('../controllers/employee.controller');
 
 //get all employees
-router.get('/', employeeRoute.getAllEmployees);
+router.get('/', controller.getAllEmployees);
 
-//get all emergency contacts
+//create new employee (for ADMIN)
+router.post('/', controller.postEmployee);
+
+/* //get all emergency contacts
 router.get('/emergency', employeeRoute.getEmergency);
 
 //get employee by id
@@ -22,6 +22,6 @@ router.post('/', employeeRoute.postNewEmployee);
 router.put('/:id', employeeRoute.putEmployeeById);
 
 //delete employee by id
-router.delete('/:id', employeeRoute.deleteEmployee);
+router.delete('/:id', employeeRoute.deleteEmployee); */
 
 module.exports = router;
