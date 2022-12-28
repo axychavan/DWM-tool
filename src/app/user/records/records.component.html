@@ -15,78 +15,73 @@
                     class="bi bi-arrow-down-short"></i> Download .csv</button>
         </div>
 
-        <!-- Select Month -->
-        <!-- <div class="input-group input-group-sm mb-3" style="width: 300px;">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Select Month</span>
-            </div>
-            <input [(ngModel)]="month" type="month" class="custom-select" value="currMonth">
-            <button type="button" class="btn btn-sm btn-outline-primary" (click)="searchRecords()"><i
-                    class="bi bi-search"></i></button>
-        </div> -->
-
         <div class="form-row">
-            <div class="col-auto" style="width: 210px;">
-                <div class="input-group input-group-sm mb-2">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Start Date</span>
-                    </div>
-                    <input type="date" [(ngModel)]="dateSelection.startdate" name="startdate" class="form-control" aria-label="Small"
-                        aria-describedby="inputGroup-sizing-sm"
-                        onfocus="this.max=new Date().toISOString().split('T')[0]" #startdateControl="ngModel" required>
+            <div class="col-auto mr-4" style="width: 200px;">
+                <div class="form-floating mb-3" style="width: 200px;">
+                    <input type="month" [(ngModel)]="currMonth" class="form-control" id="currMonth" placeholder="month"
+                        [value]="currMonth" (change)="monthChange()">
+                    <label for="currMonth">Select Month</label>
                 </div>
             </div>
-            <div class="col-auto" style="width: 210px;">
-                <div class="input-group input-group-sm">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">End Date</span>
-                    </div>
-                    <input type="date" [(ngModel)]="dateSelection.enddate" name="enddate" class="form-control" aria-label="Small"
-                        aria-describedby="inputGroup-sizing-sm"
-                        onfocus="this.max=new Date().toISOString().split('T')[0]" #enddateControl="ngModel" required>
+            <div class="col-auto" style="width: 200px;">
+                <div class="form-floating mb-3">
+                    <input type="date" [(ngModel)]="dateSelection.startdate" name="startdate" class="form-control"
+                        onfocus="this.max=new Date().toISOString().split('T')[0]" (change)="searchRecords()">
+                    <label for="currMonth">Start Date</label>
                 </div>
             </div>
-            <div class="col-sm-1">
-                <button type="submit" class="btn btn-sm btn-outline-primary" (click)="searchRecords()"
-                    [disabled]="!startdateControl.valid || !enddateControl.valid">
-                    <i class="bi bi-search"></i>
-                </button>
+            <div class="col-auto" style="width: 200px;">
+                <div class="form-floating mb-3">
+                    <input type="date" [(ngModel)]="dateSelection.enddate" name="enddate" class="form-control"
+                        onfocus="this.max=new Date().toISOString().split('T')[0]" (change)="searchRecords()">
+                    <label for="currMonth">End Date</label>
+                </div>
             </div>
         </div>
 
+        <div *ngIf="variab == 20">
+            Hello
+        </div>
+
         <!-- Record's Table -->
-        <table id="records" class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Attendance</th>
-                    <th scope="col">Client</th>
-                    <th scope="col">Task</th>
-                    <th scope="col">Duration</th>
-                    <th scope="col">Description</th>
-                    <th scope="col" style="width: 50px;">Functions</th>
-                </tr>
-            </thead>
-            <tbody> <!-- employeeSpecificRecords -->
-                <tr *ngFor="let item of sortedRecords; let i = index">
-                    <td>{{i + 1}}</td>
-                    <td>{{item.date | date: 'dd-MM-yyyy'}}</td>
-                    <td>{{item.attendance}}</td>
-                    <td>{{item.cl_name}}</td>
-                    <td>{{item.task}}</td>
-                    <td>{{item.duration}}</td>
-                    <td>{{item.description}}</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-primary btn-sm
-                  mr-2" data-toggle="modal" data-target="#updaterecord" disabled><i
-                                class="bi bi-pencil-square"></i></button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" (click)=" delete_Record(item)"><i
-                                class="bi bi-trash"></i></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div style="height: 570px; overflow: auto;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Attendance</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Task</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Description</th>
+                        <th scope="col" style="width: 50px;">Functions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="sortedRecords == ''">
+                        <th class="text-center" colspan="8">No Records Found</th>
+                    </tr>
+                    <!-- employeeSpecificRecords -->
+                    <tr *ngFor="let item of sortedRecords; let i = index">
+                        <td>{{i + 1}}</td>
+                        <td>{{item.date | date: 'dd-MM-yyyy'}}</td>
+                        <td>{{item.attendance}}</td>
+                        <td>{{item.cl_name}}</td>
+                        <td>{{item.task}}</td>
+                        <td>{{item.duration}}</td>
+                        <td>{{item.description}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary btn-sm
+                      mr-2" data-toggle="modal" data-target="#updaterecord" disabled><i
+                                    class="bi bi-pencil-square"></i></button>
+                            <button type="button" class="btn btn-outline-danger btn-sm"
+                                (click)=" delete_Record(item)"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

@@ -10,6 +10,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { AdminFooterComponent } from './admin-footer/admin-footer.component';
 import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
+import { AdminRecordsComponent } from './admin-records/admin-records.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
     ClientsComponent,
     TasksComponent,
     AdminFooterComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    AdminRecordsComponent
   ],
   imports: [
     CommonModule,

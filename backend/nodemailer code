@@ -1,0 +1,25 @@
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'dwm.infodesk@gmail.com',
+        pass: 'ffllksemchyzedtu'
+    }
+});
+
+var mailOptions = {
+    from: 'dwm.infodesk@gmail.com',
+    to: 'akshaychavanaxy@gmail.com',
+    subject: 'A new user has signed up',
+    text: 'That was easy!',
+    html: '<h1>Welcome</h1><p>That was easy!</p>'
+};
+
+transporter.sendMail(mailOptions, function (err, res) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('Email sent: ' + res.response);
+    }
+});

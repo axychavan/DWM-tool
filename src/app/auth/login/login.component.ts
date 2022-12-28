@@ -15,11 +15,8 @@ export class LoginComponent implements OnInit {
     this.show = !this.show;
   }
 
-  loginData: any = {};
-
-  empidItem: any;
-  passwordItem: any;
-  roleItem: any;
+  loginInput: any = {};
+  forgotPasswordInput: any = {};
 
   constructor(
     private authService: AuthService,
@@ -28,36 +25,43 @@ export class LoginComponent implements OnInit {
   ) { }
 
   login() {
-    console.log("User Input", this.loginData.empid, this.loginData.password)
+    console.log("User Input", this.loginInput.empid, this.loginInput.password)
 
-    this.authService.loginUser(this.loginData).subscribe((res) => {
+    this.authService.loginUser(this.loginInput).subscribe((res) => {
       console.log("Login response", res);
 
-      let empidkey = res.map((item) => item.empid);
-      localStorage.setItem("empid", empidkey);
+      var rolekey = res.role;
+      var reviewedkey = res.reviewed;
+      var statuskey = res.status;
 
-      let passwordkey = res.map((item) => item.password);
-      localStorage.setItem("password", passwordkey);
-
-      let rolekey = res.map((item) => item.role);
-      localStorage.setItem("role", rolekey);
-
-      this.empidItem = localStorage.getItem('empid');
-      this.passwordItem = localStorage.getItem('password');
-      this.roleItem = localStorage.getItem('role');
-
-      //console.log("role", this.roleItem);
-
-      if (this.roleItem == "employee") {
+      if (rolekey == "employee" && reviewedkey == "yes" && statuskey == "active") {
         this.router.navigate(['dashboard']);
-        this.toast.success({ detail: "Login Successful", summary: 'Welcome back !', duration: '3000' });
-      } else if (this.roleItem == "admin") {
+        this.toast.success({ detail: "Login Successful", summary: 'Welcome !!!', duration: '3000' });
+      } else if (reviewedkey == "no") {
+        this.router.navigate(['under-review']);
+        this.toast.warning({ detail: "Awaiting Review", summary: 'Administrator is reviewing your account.', duration: '3000' });
+      } else if (statuskey == "inactive") {
+        this.router.navigate(['inactive']);
+        this.toast.error({ detail: "Account Inactive", summary: 'Your account is inactive.', duration: '3000' });
+      } else if (rolekey == "admin") {
         this.router.navigate(['admin-dashboard']);
         this.toast.success({ detail: "Login Successful", summary: 'Logged as an Admin', duration: '3000' });
       } else {
         this.toast.error({ detail: "Login Failed", summary: 'Please enter correct credentials', duration: '3000' });
-        this.loginData.empid = '';
-        this.loginData.password = '';
+        this.loginInput.empid = "";
+        this.loginInput.password = "";
+      }
+    })
+  }
+
+  forgotPassword() {
+    this.authService.forgotPwd(this.forgotPasswordInput).subscribe((res) => {
+      console.log("forgot-password response", res);
+
+      if (res.message == "Valid credentials. Email sent") {
+        this.toast.success({ detail: "Email Sent", summary: 'Credentials sent on your email', duration: '3000' });
+      } else {
+        this.toast.error({ detail: "Invalid Email/Phone", summary: 'Please enter correct credentials', duration: '3000' });
       }
     })
   }

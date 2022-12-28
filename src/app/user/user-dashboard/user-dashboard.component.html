@@ -2,7 +2,172 @@
 <app-user-navbar></app-user-navbar>
 
 <!-- Main Content -->
-<router-outlet></router-outlet>
+
+<!-- Profile -->
+<div class="card m-3">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4 text-center m-auto">
+                <img src="assets/profile.jpg" class="img-fluid w-50" alt="Profile Photo">
+            </div>
+            <div class="col">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Employee ID : </li>
+                    <li class="list-group-item">Name : </li>
+                    <li class="list-group-item">Email : </li>
+                    <li class="list-group-item">Phone : </li>
+                    <li class="list-group-item">Designation: XXX Date of Joining :</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Records -->
+<div class="card m-3">
+    <div class="card-body">
+        <h5>
+            <i class="bi bi-calendar-check"></i> Daily Work Management Records
+            <span style="float: right;">
+                <button type="button" class="btn btn-sm btn-primary mr-2"><i class="bi bi-plus"></i> Add</button>
+                <button type="button" class="btn btn-sm btn-outline-success" (click)="downloadRecords()"><i
+                        class="bi bi-arrow-down-short"></i>
+                    Download .csv</button>
+            </span>
+        </h5>
+        <div class="form-row mt-3 mb-3">
+            <div class="col-auto mr-4" style="width: 200px;">
+                <div class="form-floating" style="width: 200px;">
+                    <input type="month" [(ngModel)]="currMonth" class="form-control" id="currMonth" placeholder="month"
+                        [value]="currMonth">
+                    <label for="currMonth">Select Month</label>
+                </div>
+            </div>
+            <div class="col-auto" style="width: 200px;">
+                <div class="form-floating">
+                    <input type="date" [(ngModel)]="startdate" name="startdate" class="form-control"
+                        onfocus="this.max=new Date().toISOString().split('T')[0]">
+                    <label for="currMonth">Start Date</label>
+                </div>
+            </div>
+            <div class="col-auto" style="width: 200px;">
+                <div class="form-floating">
+                    <input type="date" [(ngModel)]="enddate" name="enddate" class="form-control"
+                        onfocus="this.max=new Date().toISOString().split('T')[0]">
+                    <label for="currMonth">End Date</label>
+                </div>
+            </div>
+        </div>
+
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Attendance</th>
+                    <th scope="col">Function</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>26-12-2022</td>
+                    <td>Infosys</td>
+                    <td>create frontend</td>
+                    <td>6</td>
+                    <td>NA</td>
+                    <td>Full-Day</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary btn-sm
+                      mr-2" data-toggle="modal" data-target="#updaterecord">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>26-12-2022</td>
+                    <td>Infosys</td>
+                    <td>create frontend</td>
+                    <td>6</td>
+                    <td>NA</td>
+                    <td>Full-Day</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary btn-sm
+                      mr-2" data-toggle="modal" data-target="#updaterecord">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>26-12-2022</td>
+                    <td>Infosys</td>
+                    <td>create frontend</td>
+                    <td>6</td>
+                    <td>NA</td>
+                    <td>Full-Day</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary btn-sm
+                      mr-2" data-toggle="modal" data-target="#updaterecord">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>26-12-2022</td>
+                    <td>Infosys</td>
+                    <td>create frontend</td>
+                    <td>6</td>
+                    <td>NA</td>
+                    <td>Full-Day</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary btn-sm
+                      mr-2" data-toggle="modal" data-target="#updaterecord">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>26-12-2022</td>
+                    <td>Infosys</td>
+                    <td>create frontend</td>
+                    <td>6</td>
+                    <td>NA</td>
+                    <td>Full-Day</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary btn-sm
+                      mr-2" data-toggle="modal" data-target="#updaterecord">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
 
 <!-- Footer -->
 <app-footer></app-footer>

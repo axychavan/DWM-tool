@@ -14,6 +14,7 @@ export class UserService {
   record = "http://localhost:3000/api/v1/records";
   emergency = "http://localhost:3000/api/v1/employee/emergency";
   customdate = "http://localhost:3000/api/v1/records/customdate";
+  month = "http://localhost:3000/api/v1/records/month";
 
   constructor(private http: HttpClient) { }
 
@@ -49,6 +50,10 @@ export class UserService {
 
   customDate(data: any) {
     return this.http.post<any>(this.customdate, data);
+  }
+
+  customMonth(data: any) {
+    return this.http.post<any>(this.month, data);
   }
 
   addRecord(data: any) {

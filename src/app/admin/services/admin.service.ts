@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class AdminService {
 
   employee = "http://localhost:3000/api/v1/employee";
+  records = "http://localhost:3000/api/v1/records/customdate";
   client = "http://localhost:3000/api/v1/client";
   task = "http://localhost:3000/api/v1/task";
   ctmap = "http://localhost:3000/api/v1/ctmap";
@@ -28,6 +29,11 @@ export class AdminService {
 
   deleteEmployee(id: string) {
     return this.http.delete(this.employee + '/' + id);
+  }
+
+  // Records
+  postRecords(data: any) {
+    return this.http.post<any>(this.records, data);
   }
 
   //Client
